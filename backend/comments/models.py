@@ -4,7 +4,6 @@ from recipes.models import Recipe
 
 
 # Create your models here.
-
 class Comment(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -11,6 +11,6 @@ class Recipe(models.Model):
     instructions = models.TextField()
     image = models.ImageField(upload_to='recipes/', blank=True, null=True)
     serving_size = models.PositiveIntegerField(default=1)
-
+    
 
 
