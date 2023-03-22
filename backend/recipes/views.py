@@ -22,7 +22,7 @@ def recipe_list(request):
 @permission_classes([IsAuthenticated])
 def add_recipe(request):
     serializer = RecipeSerializer(data=request.data)
-    parser_classes = (MultiPartParser, FormParser) #required to automatically parse out form-data
+    parser_classes = (MultiPartParser, FormParser) #required to automatically parse out form-data-data
     if serializer.is_valid():
         serializer.save(user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)

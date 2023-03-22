@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'cars.apps.CarsConfig',  # This app is for example use only
     'recipes',
+    'recipe_ingredient',
+    'ingredients',
+    'category',
     'comments',
     'replies',
 ]

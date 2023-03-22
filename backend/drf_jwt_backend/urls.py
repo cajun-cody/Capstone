@@ -25,4 +25,5 @@ urlpatterns = [
     path('api/auth/', include('authentication.urls')),
     path('api/cars/', include('cars.urls')),
     path('api/recipes/', include('recipes.urls')),
+    path('api/ingredients/', include('ingredients.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
