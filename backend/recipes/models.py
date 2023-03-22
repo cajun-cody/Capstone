@@ -1,6 +1,11 @@
 from django.db import models
 from authentication.models import User
 
+# lets us explicitly set upload path and filename
+def upload_to(instance, filename):
+    return 'images/{filename}'.format(filename=filename)
+
+
 # Create your models here.
 class Recipe(models.Model):
     title = models.CharField(max_length=255)
@@ -9,7 +14,7 @@ class Recipe(models.Model):
     description = models.TextField()
     ingredients = models.TextField()
     instructions = models.TextField()
-    image = models.ImageField(upload_to='recipes/', blank=True, null=True)
+    image = models.ImageField(upload_to=upload_to, blank=True, null=True)
     serving_size = models.PositiveIntegerField(default=1)
     
 
