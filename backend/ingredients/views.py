@@ -28,7 +28,7 @@ def add_ingredient(request):
 @api_view(['GET','PUT','DELETE'])
 @permission_classes([IsAuthenticated])
 def get_ingredient_by_id(request, pk):
-    ingredient = get_object_or_404(Ingredient, pk=pk)
+    ingredient = get_object_or_404(Ingredient, pk=pk) #Checks to find if ingredient exists and matches a primary key. 
     if request.method == 'GET':
         serializer = IngredientSerializer(ingredient)
         return Response(serializer.data, status=status.HTTP_200_OK)
