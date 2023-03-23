@@ -28,10 +28,19 @@ def add_recipe(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET'])
+@api_view(['GET','PUT','DELETE'])
 @permission_classes([IsAuthenticated])
 def get_recipe_by_id(request, pk):
     recipe = get_object_or_404(Recipe,pk=pk)
     if request.method == 'GET':
         serializer = RecipeSerializer(recipe)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'PUT':
+        serializer = RecipeSerializer(recipe, data=request.data, partial=True)
+        parser_classes = (MultiPartParser, FormParser)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+    elif request.method == 'DELETE':
+        recipe.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
