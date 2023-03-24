@@ -6,7 +6,9 @@ from recipes.models import Recipe
 from recipes.serializers import RecipeSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework.parsers import MultiPartParser, FormParser
-
+from recipe_ingredient.models import RecipeIngredient
+from ingredients.models import Ingredient
+from ingredients.serializers import IngredientSerializer
 
 
 # Create your views here.
@@ -44,3 +46,19 @@ def get_recipe_by_id(request, pk):
     elif request.method == 'DELETE':
         recipe.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_all_ingredients_of_recipe(request, pk):
+    recipe_ingredients = RecipeIngredient.objects.filter(recipe_id=pk)
+
+    print(recipe_ingredients[0].ingredient_id)
+    recipe_ingredients_list = []
+    for item in recipe_ingredients:
+        ingredient_item = {
+            
+        }
+        # ingredient = Ingredient.objects.get(id=item.ingredient_id)
+        recipe_ingredients_list.append(item.ingredient_id)
+    serializer = IngredientSerializer(recipe_ingredients_list, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)

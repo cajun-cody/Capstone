@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication.apps.AuthenticationConfig',
     'corsheaders',
+    'debug_toolbar',
     'cars.apps.CarsConfig',  # This app is for example use only
     'recipes',
     'recipe_ingredient',
@@ -57,10 +58,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECT': False
+}
 
 ROOT_URLCONF = 'drf_jwt_backend.urls'
 

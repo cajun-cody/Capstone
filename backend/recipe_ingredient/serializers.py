@@ -7,4 +7,5 @@ class RecipeIngredientSerializer(serializers.ModelSerializer):
         fields = ['id', 'recipe_id', 'ingredient_id', 'quantity', 'units']
         depth = 1
 
-    # recipe_id = serializers.CharField(write_only=True)
+    recipe_id = serializers.IntegerField(write_only=True)
+    ingredient_id = serializers.IntegerField(write_only=True)

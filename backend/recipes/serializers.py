@@ -10,3 +10,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         depth = 1
 
     user_id = serializers.IntegerField(write_only=True) #Allows us to use the user_id in the form-data for testing.
+
+
+
+    
