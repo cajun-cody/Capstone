@@ -26,5 +26,8 @@ urlpatterns = [
     path('api/cars/', include('cars.urls')),
     path('api/recipes/', include('recipes.urls')),
     path('api/ingredients/', include('ingredients.urls')),
-    path('api/recipe_ingredient/', include('recipe_ingredient.urls'))
+    path('api/recipe_ingredient/', include('recipe_ingredient.urls')),
+    path('api/comments/', include('comments.urls')),
+    path('api/replies/', include('replies.urls')),
+    path('api/category/', include('category.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
