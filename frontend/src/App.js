@@ -30,7 +30,7 @@ function App() {
           }
         />
         <Route path='/search' element={<SearchPage/>} />
-        <Route path= "/recipe" element={<RecipePage />} />
+        <Route path= "/recipe/:recipeId" element={<RecipePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>

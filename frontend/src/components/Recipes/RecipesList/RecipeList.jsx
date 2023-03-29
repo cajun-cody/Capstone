@@ -15,16 +15,20 @@ async function getAllRecipes() {
     setRecipes(response.data)
     console.log(response.data)
 }
-//
-// useEffect(() => {
-//     getAllRecipes();
-// });
 
+useEffect(() => {
+    getAllRecipes();
+},[]);
+
+
+//Mapper includes a link in the list of recipes. The link has a path to the recipe display page.
 return ( 
     <div className="gird-container">
         <div>These are my recipes</div>
         <div className="grid-thumbnail">
-             {recipes&&recipes.map( item => <RecipeTile key={item.id} recipe={item} />)} 
+             {recipes&&recipes.map( item =>  <Link to={`/recipe/${item.id}`} onClick={() => setRecipes(item.id)}>
+             <RecipeTile  key={item.id} recipe={item} />
+             </Link>)} 
             <button onClick={ () => getAllRecipes()}>Get Recipes</button>
         </div>
         
