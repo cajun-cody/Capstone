@@ -70,7 +70,7 @@ const RecipeDisplay = (props) => {
             <h5>Servings: {recipe?.serving_size}</h5>
             <div>
                 <p>Ingredients:</p>
-                <ul>
+                <ul style={{display:"flex",flexDirection:"column"}}>
                     {ingredients?.map(item => (
                         <li key={item.name}>
                             {item.quantity} {item.units} of {item.ingredient_name}  

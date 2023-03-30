@@ -51,6 +51,15 @@ def get_recipe_by_id(request, pk):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+def get_user_recipes(request, user_id):
+    recipes = Recipe.objects.filter(user_id=user_id)
+    serializer = RecipeSerializer(recipes, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get_all_ingredients_of_recipe(request, pk):
     #Filtering RecipeIngredient for Ingredient items that are attached to recipe_id
     recipe_ingredients = RecipeIngredient.objects.filter(recipe_id=pk)

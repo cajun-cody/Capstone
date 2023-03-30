@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import SearchPage from "./pages/SearchPage/SearchPage";
+import MyRecipesPage from "./pages/MyRecipes/MyRecipesPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -29,6 +30,7 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path='/myrecipes' element={<MyRecipesPage/>} />
         <Route path='/search' element={<SearchPage/>} />
         <Route path= "/recipe/:recipeId" element={<RecipePage />} />
         <Route path="/register" element={<RegisterPage />} />
