@@ -15,7 +15,7 @@ async function getAllRecipes() {
     setRecipes(response.data)
     console.log(response.data)
 }
-
+//Remember to add the [] as a parameter to prevent infinite loop
 useEffect(() => {
     getAllRecipes();
 },[]);
@@ -29,7 +29,7 @@ return (
              {recipes&&recipes.map( item =>  <Link to={`/recipe/${item.id}`} onClick={() => setRecipes(item.id)}>
              <RecipeTile  key={item.id} recipe={item} />
              </Link>)} 
-            <button onClick={ () => getAllRecipes()}>Get Recipes</button>
+            {/* <button onClick={ () => getAllRecipes()}>Get Recipes</button> */}
         </div>
         
     </div>
