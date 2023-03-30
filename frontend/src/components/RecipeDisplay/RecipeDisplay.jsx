@@ -8,6 +8,7 @@ import useAuth from "../../hooks/useAuth";
 const RecipeDisplay = (props) => {
     // const {recipeId} = useParams();
     const [recipe, setRecipe] = useState()
+    const [ingredients, setIngredients] = useState()
     const [user, token] = useAuth();
     // const ingredients = [{}];
    
@@ -16,14 +17,41 @@ const RecipeDisplay = (props) => {
     // Grab the ID with useParams here and use in the AXIOS URL request
 
     //Using props "recipeId" brought in and defined on RecipePage.
+    // async function getRecipeById() {
+    //     let response = await axios.get(`http://127.0.0.1:8000/api/recipes/${props.recipeId}/`, {
+    //         headers: {
+    //             Authorization: "Bearer " + token,
+    //         },
+    //     });
+    //     setRecipe(response.data)
+    //     console.log(response.data)
+    // }
+
     async function getRecipeById() {
-        let response = await axios.get(`http://127.0.0.1:8000/api/recipes/${props.recipeId}/`, {
-            headers: {
-                Authorization: "Bearer " + token,
-            },
-        });
-        setRecipe(response.data)
-        console.log(response.data)
+        try {
+            let recipeResponse = await axios.get(`http://127.0.0.1:8000/api/recipes/${props.recipeId}/`, {
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            });
+
+            let ingredientsResponse = await axios.get(`http://127.0.0.1:8000/api/recipes/all_ingredients/${props.recipeId}/`, {
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            });
+
+            // const recipe = recipeResponse.data;
+            // const ingredients = ingredientsResponse.data
+
+            setRecipe(recipeResponse.data)
+            setIngredients(ingredientsResponse.data)
+            console.log(recipeResponse.data)
+            console.log(ingredientsResponse.data)
+            
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     useEffect(() => {
@@ -42,13 +70,22 @@ const RecipeDisplay = (props) => {
             <h5>Servings: {recipe?.serving_size}</h5>
             <div>
                 <p>Ingredients:</p>
-                <ul>{recipe?.ingredients.map(item => <li key={item.name}>{item.name}</li>)}</ul>
+                <ul>
+                    {ingredients?.map(item => (
+                        <li key={item.name}>
+                            {item.quantity} {item.units} of {item.ingredient_name}  
+                        <br />
+                        </li>
+                    ))}
+                </ul>
             </div>
-            <h5>Recipe added by: {recipe?.user.username}</h5>
+            <h5>Recipe added by: {recipe?.user.username.charAt(0).toUpperCase() + recipe?.user.username.slice(1)}</h5>
             {/* <button onClick={ () => getRecipeById()}>Get Recipe by ID</button> */}
         </div>
         
      );
 }
+
  
 export default RecipeDisplay;
+{/* <ul>{recipe?.ingredients.map(item => <li key={item.name}>{item.name}</li>)}</ul> */}
