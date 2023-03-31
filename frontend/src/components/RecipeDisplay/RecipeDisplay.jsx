@@ -80,6 +80,8 @@ const RecipeDisplay = (props) => {
                 </ul>
             </div>
             <h5>Recipe added by: {recipe?.user.username.charAt(0).toUpperCase() + recipe?.user.username.slice(1)}</h5>
+            {user?.id===recipe?.user.id?<p>You Made this!</p>: null}
+
             {/* <button onClick={ () => getRecipeById()}>Get Recipe by ID</button> */}
         </div>
         
