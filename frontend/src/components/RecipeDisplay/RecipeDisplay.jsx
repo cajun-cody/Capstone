@@ -2,6 +2,7 @@ import axios from "axios";
 // import { useParams } from "react-router-dom";
 import React, {useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import CommentList from "../CommentList/CommentList";
 
 
 //Component to fetch a single recipe and display it. 
@@ -62,9 +63,13 @@ const RecipeDisplay = (props) => {
       };
       //Function to handle change of the from the original ingredient servings and setServings. 
       const handleServingsChange = (event) => {
-        const newServings = parseInt(event.target.value);
-        setServings(newServings);
-        setIngredients(updateQuantities(ingredients, newServings));
+        try{
+            const newServings = parseInt(event.target.value || 1);
+            setServings(newServings);
+            setIngredients(updateQuantities(ingredients, newServings));
+        }catch(er){
+            console.log(er)
+        }
       };
 
 
@@ -86,7 +91,7 @@ const RecipeDisplay = (props) => {
                     onChange={handleServingsChange}
                 />
             </h5>
-            <div>
+            {servings?<div>
                 <p>Ingredients:</p>
                 <ul style={{display:"flex",flexDirection:"column"}}>
                     {ingredients?.map(item => (
@@ -96,11 +101,15 @@ const RecipeDisplay = (props) => {
                         </li>
                     ))}
                 </ul>
-            </div>
+            </div>:null}
             <h5>Recipe added by: {recipe?.user.username.charAt(0).toUpperCase() + recipe?.user.username.slice(1)}</h5>
             {user?.id===recipe?.user.id?<p>You Made this!</p>: null}
-
-            {/* <button onClick={ () => getRecipeById()}>Get Recipe by ID</button> */}
+            <div className="comment-container">
+                <div className="comment-section"><h3 className="h3">Comments</h3>
+                        <CommentList recipe_id={recipe?.id} />
+                </div>
+            </div>
+            
         </div>
         
      );
@@ -125,3 +134,5 @@ export default RecipeDisplay;
     //     setRecipe(response.data)
     //     console.log(response.data)
     // }
+
+    {/* <button onClick={ () => getRecipeById()}>Get Recipe by ID</button> */}
