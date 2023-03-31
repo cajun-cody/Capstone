@@ -10,23 +10,8 @@ const RecipeDisplay = (props) => {
     const [recipe, setRecipe] = useState()
     const [ingredients, setIngredients] = useState()
     const [user, token] = useAuth();
-    // const ingredients = [{}];
-   
-    // Need the recipe ID from the RecipeList item that is clicked on
-    // Send the ID as a param on the URL
-    // Grab the ID with useParams here and use in the AXIOS URL request
-
-    //Using props "recipeId" brought in and defined on RecipePage.
-    // async function getRecipeById() {
-    //     let response = await axios.get(`http://127.0.0.1:8000/api/recipes/${props.recipeId}/`, {
-    //         headers: {
-    //             Authorization: "Bearer " + token,
-    //         },
-    //     });
-    //     setRecipe(response.data)
-    //     console.log(response.data)
-    // }
-
+    
+    //Async function to get a single recipe by Id and also get the ingredient objects(name, quantity and units)
     async function getRecipeById() {
         try {
             let recipeResponse = await axios.get(`http://127.0.0.1:8000/api/recipes/${props.recipeId}/`, {
@@ -41,8 +26,6 @@ const RecipeDisplay = (props) => {
                 },
             });
 
-            // const recipe = recipeResponse.data;
-            // const ingredients = ingredientsResponse.data
 
             setRecipe(recipeResponse.data)
             setIngredients(ingredientsResponse.data)
@@ -53,10 +36,36 @@ const RecipeDisplay = (props) => {
             console.error(error);
         }
     }
-
+    //useEffect hook to fetch recipe and ingredients data when the component mounts or token changes
     useEffect(() => {
         getRecipeById();
-    }, [token]);
+    }, [token, props.recipeId]);
+
+    //State to store the number of servings 
+    const [servings, setServings] = useState(recipe?.serving_size || 1);
+    //useEffect hook to update the Change Servings input to match the recipe servings
+    useEffect(() => {
+        if (recipe) {
+            setServings(recipe.serving_size);
+        }
+    }, [recipe])
+
+    //Function to update the ingredient quantity for each ingredient. 
+    const updateQuantities = (ingredients, newServings) => {
+        const updatedIngredients = ingredients.map((ingredient) => {
+          return {
+            ...ingredient,
+            quantity: (ingredient.quantity / servings) * newServings,
+          };
+        });
+        return updatedIngredients;
+      };
+      //Function to handle change of the from the original ingredient servings and setServings. 
+      const handleServingsChange = (event) => {
+        const newServings = parseInt(event.target.value);
+        setServings(newServings);
+        setIngredients(updateQuantities(ingredients, newServings));
+      };
 
 
     return ( 
@@ -67,7 +76,16 @@ const RecipeDisplay = (props) => {
             <h4>Chef: {recipe?.home_chef}</h4>
             <h5>Description: {recipe?.description}</h5>
             <h5>Category: {recipe?.category.category}</h5>
-            <h5>Servings: {recipe?.serving_size}</h5>
+            <h5>Recipe Servings: {recipe?.serving_size}</h5>
+            <h5>
+                Change Servings:
+                <input
+                    type="number"
+                    value={servings}
+                    min="1"
+                    onChange={handleServingsChange}
+                />
+            </h5>
             <div>
                 <p>Ingredients:</p>
                 <ul style={{display:"flex",flexDirection:"column"}}>
@@ -91,3 +109,19 @@ const RecipeDisplay = (props) => {
  
 export default RecipeDisplay;
 {/* <ul>{recipe?.ingredients.map(item => <li key={item.name}>{item.name}</li>)}</ul> */}
+    // const ingredients = [{}];
+   
+    // Need the recipe ID from the RecipeList item that is clicked on
+    // Send the ID as a param on the URL
+    // Grab the ID with useParams here and use in the AXIOS URL request
+
+    //Using props "recipeId" brought in and defined on RecipePage.
+    // async function getRecipeById() {
+    //     let response = await axios.get(`http://127.0.0.1:8000/api/recipes/${props.recipeId}/`, {
+    //         headers: {
+    //             Authorization: "Bearer " + token,
+    //         },
+    //     });
+    //     setRecipe(response.data)
+    //     console.log(response.data)
+    // }
