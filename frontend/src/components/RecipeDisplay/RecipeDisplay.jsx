@@ -2,6 +2,7 @@ import axios from "axios";
 // import { useParams } from "react-router-dom";
 import React, {useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import CommentForm from "../CommentForm/CommentForm";
 import CommentList from "../CommentList/CommentList";
 
 
@@ -61,17 +62,40 @@ const RecipeDisplay = (props) => {
         });
         return updatedIngredients;
       };
-      //Function to handle change of the from the original ingredient servings and setServings. 
-      const handleServingsChange = (event) => {
-        try{
-            const newServings = parseInt(event.target.value || 1);
-            setServings(newServings);
-            setIngredients(updateQuantities(ingredients, newServings));
-        }catch(er){
-            console.log(er)
-        }
-      };
+    //   //Function to handle change of the from the original ingredient servings and setServings. 
+    //   const handleServingsChange = (event) => {
+    //     try{
+    //         const newServings = parseInt(event.target.value || 1);
+    //         setServings(newServings);
+    //         setIngredients(updateQuantities(ingredients, newServings));
+    //     }catch(er){
+    //         console.log(er)
+    //     }
+    //   };
 
+            // Add a new state for the previous valid servings value
+        const [prevValidServings, setPrevValidServings] = useState(recipe?.serving_size || 1);
+        // Add a new state for the input value
+        const [inputValue, setInputValue] = useState();
+
+        const handleServingsChange = (event) => {
+            const value = event.target.value;
+            setInputValue(value); // Update the inputValue state
+
+            let newServings;
+            try {
+                newServings = parseInt(value);
+                if (isNaN(newServings) || newServings <= 0) {
+                newServings = prevValidServings;
+                } else {
+                setPrevValidServings(newServings);
+                }
+                setServings(newServings);
+                setIngredients(updateQuantities(ingredients, newServings));
+            } catch (er) {
+                console.log(er);
+            }
+            };
 
     return ( 
         <div>
@@ -86,7 +110,7 @@ const RecipeDisplay = (props) => {
                 Change Servings:
                 <input
                     type="number"
-                    value={servings}
+                    value={inputValue}
                     min="1"
                     onChange={handleServingsChange}
                 />
@@ -105,6 +129,9 @@ const RecipeDisplay = (props) => {
             <h5>Recipe added by: {recipe?.user.username.charAt(0).toUpperCase() + recipe?.user.username.slice(1)}</h5>
             {user?.id===recipe?.user.id?<p>You Made this!</p>: null}
             <div className="comment-container">
+                <div className="comment-form">
+                        <CommentForm recipe_id={recipe?.id} />
+                </div>
                 <div className="comment-section"><h3 className="h3">Comments</h3>
                         <CommentList recipe_id={recipe?.id} />
                 </div>
