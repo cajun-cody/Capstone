@@ -18,7 +18,7 @@ class Recipe(models.Model):
     instructions = models.TextField()
     image = models.ImageField(upload_to=upload_to,blank=True, null=True)
     serving_size = models.PositiveIntegerField(default=1)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, default='Anytime Meal')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
     
 
 

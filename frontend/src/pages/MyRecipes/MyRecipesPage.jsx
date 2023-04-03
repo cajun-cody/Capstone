@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import RecipeList from "../../components/Recipes/RecipesList/RecipeList";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
-
+import NewRecipeForm from "../../components/NewRecipeForm/NewRecipeForm";
 
 const MyRecipesPage = () => {
 
@@ -33,6 +33,7 @@ const MyRecipesPage = () => {
     return ( 
         <section>
             <div>This Is My Recipe Page</div>
+            <NewRecipeForm />
             <RecipeList recipes={recipes}/>
         </section>
      );

@@ -126,6 +126,7 @@ const RecipeDisplay = (props) => {
                     ))}
                 </ul>
             </div>:null}
+            <h5>Instructions: {recipe?.instructions}</h5>
             <h5>Recipe added by: {recipe?.user.username.charAt(0).toUpperCase() + recipe?.user.username.slice(1)}</h5>
             {user?.id===recipe?.user.id?<p>You Made this!</p>: null}
             <div className="comment-container">
