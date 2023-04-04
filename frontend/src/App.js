@@ -16,6 +16,7 @@ import Footer from "./components/Footer/Footer";
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 import RecipePage from "./pages/RecipePage/RecipePage";
+import NewRecipePage from "./pages/NewRecipePage/NewRecipePage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path='/newrecipe' element={<NewRecipePage/>} />
         <Route path='/myrecipes' element={<MyRecipesPage/>} />
         <Route path='/search' element={<SearchPage/>} />
         <Route path= "/recipe/:recipeId" element={<RecipePage />} />

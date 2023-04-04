@@ -68,12 +68,12 @@ def get_all_ingredients_of_recipe(request, pk):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-# @api_view(['POST'])
-# @permission_classes([IsAuthenticated])
-# def add_recipe(request):
-#     # Create RecipeSerializer instance with the data from the request
-#     serializer = RecipeSerializer(data=request.data)
-#     parser_classes = (MultiPartParser, FormParser)
+# # @api_view(['POST'])
+# # @permission_classes([IsAuthenticated])
+# # def add_recipe(request):
+# #     # Create RecipeSerializer instance with the data from the request
+# #     serializer = RecipeSerializer(data=request.data)
+# #     parser_classes = (MultiPartParser, FormParser)
     
 # @api_view(['POST'])
 # @permission_classes([IsAuthenticated])
@@ -85,36 +85,36 @@ def get_all_ingredients_of_recipe(request, pk):
 #         print(recipe_data)
 #         ingredients_data = recipe_data.pop('ingredient_name')
 #         print(ingredients_data)
-#         # recipe_ingredients_list = []
-#         # #Create the list of ingredients
-#         # for ingredient_data in ingredients_data:
-#         #     ingredient_serializer = IngredientSerializer(data=ingredient_data)
-#         #     if ingredient_serializer.is_valid():
-#         #         try:
-#         #             ingredient = Ingredient.objects.get(name=ingredient_data['name'])
-#         #             recipe_data['ingredients'].add(ingredient)
-#         #         except Ingredient.DoesNotExist:
-#         #             ingredient = ingredient_serializer.save()
-#         #             recipe_data['ingredients'].add(ingredient)
-#         #     else:
-#         #         return Response(ingredient_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#         recipe_ingredients_list = []
+#         #Create the list of ingredients
+#         for ingredient_data in ingredients_data:
+#             ingredient_serializer = IngredientSerializer(data=ingredient_data)
+#             if ingredient_serializer.is_valid():
+#                 try:
+#                     ingredient = Ingredient.objects.get(name=ingredient_data['name'])
+#                     recipe_data['ingredients'].add(ingredient)
+#                 except Ingredient.DoesNotExist:
+#                     ingredient = ingredient_serializer.save()
+#                     recipe_data['ingredients'].add(ingredient)
+#             else:
+#                 return Response(ingredient_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
-#         # recipe = Recipe.objects.create(user=request.user, **recipe_data)
-#         # #Loop to create the ingredient and recipe ingredient in database.
-#         # for ingredient_data in ingredients_data:
-#         #     ingredient = Ingredient.objects.get(name=ingredient_data['name'])
-#         #     recipe_ingredient, created = RecipeIngredient.objects.get_or_create(recipe=recipe, ingredient=ingredient)
-#         #     if not created:
-#         #         recipe_ingredient.quantity = ingredient_data['quantity']
-#         #         recipe_ingredient.units = ingredient_data['units']
-#         #         recipe_ingredient.save()
-#         #     else:
-#         #         recipe_ingredient.quantity = ingredient_data['quantity']
-#         #         recipe_ingredient.units = ingredient_data['units']
-#         #         recipe_ingredient.save()
-#         #         recipe_ingredients_list.append(recipe_ingredient)
+#         recipe = Recipe.objects.create(user=request.user, **recipe_data)
+#         #Loop to create the ingredient and recipe ingredient in database.
+#         for ingredient_data in ingredients_data:
+#             ingredient = Ingredient.objects.get(name=ingredient_data['name'])
+#             recipe_ingredient, created = RecipeIngredient.objects.get_or_create(recipe=recipe, ingredient=ingredient)
+#             if not created:
+#                 recipe_ingredient.quantity = ingredient_data['quantity']
+#                 recipe_ingredient.units = ingredient_data['units']
+#                 recipe_ingredient.save()
+#             else:
+#                 recipe_ingredient.quantity = ingredient_data['quantity']
+#                 recipe_ingredient.units = ingredient_data['units']
+#                 recipe_ingredient.save()
+#                 recipe_ingredients_list.append(recipe_ingredient)
                 
-#         # recipe_serializer = RecipeSerializer(recipe)
+#         recipe_serializer = RecipeSerializer(recipe)
 #         return Response(status=status.HTTP_201_CREATED)
 #         # return Response(recipe_serializer.data, status=status.HTTP_201_CREATED)
         

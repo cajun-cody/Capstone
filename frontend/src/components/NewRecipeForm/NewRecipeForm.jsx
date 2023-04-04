@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
 import useAuth from "../../hooks/useAuth";
+import NewIngredientsForm from "../NewIngredientsForm/NewIngredientsForm";
 // import CreatableSelect from 'react-select/creatable';
 
 
@@ -13,22 +14,8 @@ const NewRecipeForm = (props) => {
     const [recipeServing_size, setRecipeServing_size] = useState('');
     const [recipeImage, setRecipeImage] = useState(null);
 
-    //New use states to add an ingredient and add a recipe ingredient to the database. Once this is done the recipe ingredient (name, qty, units) will be added as an object to the new recipe. 
-    const [recipeIngredients, setRecipeIngredients] = useState([])
-    const [newIngredient, setNewIngredient] = useState('');
-    const [ingredientQuantity, setIngredientQuantity] = useState('');
-    const [ingredientUnits, setIngredientUnits] = useState('');
 
     const [user, token] = useAuth();
-
-    async function addNewIngredient(newIngredient) {
-        let response = await axios.post(`http://127.0.0.1:8000/api/ingredients/`,
-        newIngredient,
-        {headers: {Authorization: "Bearer " + token}});
-        console.log(response.data)
-    }
-
-
 
     async function addNewRecipe(newRecipe) {
         try {
@@ -78,9 +65,8 @@ const NewRecipeForm = (props) => {
                 </div>
                 <div>
                     <label>Ingredients:</label>
-                    <input type='text' ></input>
+                    <NewIngredientsForm/>
                 </div>
-
                 <div className="user-inputs">
                     <label>Instructions</label>
                     <input type= 'text' value={recipeInstructions} onChange={(event) => setRecipeInstructions(event.target.value)} />
@@ -94,7 +80,7 @@ const NewRecipeForm = (props) => {
                     <input type= 'file' onChange={(event) => setRecipeImage(event.target.files[0])} accept="image/jpeg,image/png,image/gif" />
                 </div>
                 <div className="new-recipe-btn">
-                    <button class='btn btn-outline-success' type='submit'>Add New Recipe</button>
+                    <button class='btn btn-outline-success' type='submit'>Create Recipe</button>
                 </div>
 
             </form>

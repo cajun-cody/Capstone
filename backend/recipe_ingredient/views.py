@@ -24,22 +24,67 @@ def get_recipe_ingredients(request):
     serializer = RecipeIngredientSerializer(recipe_ingredients, many=True)
     return Response(serializer.data)
 
+# //Use This one
+# @api_view(['POST'])
+# @permission_classes([IsAuthenticated])
+# def add_ingredient_to_recipe(request, recipe_id, ingredient_id):
+#     #Get id of recipe and ingredient.
+#     data = request.data
+#     #Set variables-Units and Qty are user input. Recipe_id and ingredient_id will be matched on frontend using the url.
+#     units=data['units']
+#     quantity=data['quantity']
+#     recipe = get_object_or_404(Recipe, pk=recipe_id)
+#     ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
+#     #Variable to take the entire object and create it.
+#     recipe_ingredient_obj= RecipeIngredient.objects.create(recipe_id=recipe, ingredient_id=ingredient, units=units, quantity=quantity)    
+#     serializer = RecipeIngredientSerializer(recipe_ingredient_obj)
+#     print(units,quantity)
+#     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def add_ingredient_to_recipe(request, recipe_id, ingredient_id):
+def add_ingredient_to_recipe(request, recipe_id, ingredient_name):
     #Get id of recipe and ingredient.
     data = request.data
     #Set variables-Units and Qty are user input. Recipe_id and ingredient_id will be matched on frontend using the url.
     units=data['units']
     quantity=data['quantity']
     recipe = get_object_or_404(Recipe, pk=recipe_id)
-    ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
+    ingredient, created = Ingredient.objects.get_or_create(name=ingredient_name)
     #Variable to take the entire object and create it.
     recipe_ingredient_obj= RecipeIngredient.objects.create(recipe_id=recipe, ingredient_id=ingredient, units=units, quantity=quantity)    
     serializer = RecipeIngredientSerializer(recipe_ingredient_obj)
     print(units,quantity)
     return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+#Updated 4/4/23 12:26
+# @api_view(['POST'])
+# @permission_classes([IsAuthenticated])
+# def add_ingredient_to_recipe(request, recipe_id=None, ingredient_id=None):
+#     # Get user input
+#     data = request.data
+#     units = data['units']
+#     quantity = data['quantity']
+
+#     # Check if the ingredient already exists
+#     ingredient_name = data['ingredient_name']
+#     ingredient, created = Ingredient.objects.get_or_create(name=ingredient_name)
+
+#     # Get recipe and create recipe_ingredient object
+#     recipe = get_object_or_404(Recipe, pk=recipe_id)
+#     recipe_ingredient_obj = RecipeIngredient.objects.create(
+#         recipe_id=recipe.id,
+#         ingredient_id=ingredient.id,
+#         units=units,
+#         quantity=quantity
+#     )
+
+#     # Serialize and return the created object
+#     serializer = RecipeIngredientSerializer(recipe_ingredient_obj)
+#     return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
 
 
 @api_view(['GET','PUT','DELETE'])
