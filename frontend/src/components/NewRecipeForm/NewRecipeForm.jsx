@@ -1,12 +1,15 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
 import useAuth from "../../hooks/useAuth";
-import NewIngredientsForm from "../NewIngredientsForm/NewIngredientsForm";
+import { Link, useNavigate } from "react-router-dom";
+import noimage from '../../Images/No-Image-Found.jpg';
 // import CreatableSelect from 'react-select/creatable';
 
 
 const NewRecipeForm = (props) => {
 
+    
+    const navigate = useNavigate();
     const [recipeTitle, setRecipeTitle] = useState('');
     const [recipeHome_chef, setRecipeHome_chef] = useState('');
     const [recipeDescription, setRecipeDescription] = useState('');
@@ -29,7 +32,11 @@ const NewRecipeForm = (props) => {
         }
     }
 
-    
+    function navToAddIngredients () {
+        navigate('/addIngredients')
+    }
+
+
     async function handleSubmit(event) {
         event.preventDefault();
         
@@ -39,11 +46,11 @@ const NewRecipeForm = (props) => {
         formData.append("description", recipeDescription);
         formData.append("instructions", recipeInstructions);
         formData.append("serving_size", recipeServing_size);
-        formData.append("image", recipeImage);
+        formData.append("image", recipeImage? recipeImage : noimage);
         formData.append("user_id", user.id);
         
         // await addNewIngredient(formData);
-        addNewRecipe(formData);
+        addNewRecipe(formData).then(() => navToAddIngredients());
     }
     
 
@@ -63,10 +70,7 @@ const NewRecipeForm = (props) => {
                     <label>Description</label>
                     <input type= 'text' value={recipeDescription} onChange={(event) => setRecipeDescription(event.target.value)} />
                 </div>
-                <div>
-                    <label>Ingredients:</label>
-                    <NewIngredientsForm/>
-                </div>
+
                 <div className="user-inputs">
                     <label>Instructions</label>
                     <input type= 'text' value={recipeInstructions} onChange={(event) => setRecipeInstructions(event.target.value)} />
@@ -80,9 +84,8 @@ const NewRecipeForm = (props) => {
                     <input type= 'file' onChange={(event) => setRecipeImage(event.target.files[0])} accept="image/jpeg,image/png,image/gif" />
                 </div>
                 <div className="new-recipe-btn">
-                    <button class='btn btn-outline-success' type='submit'>Create Recipe</button>
+                    <button class='btn btn-outline-success' type='submit'>Add Recipe Ingredients</button>
                 </div>
-
             </form>
         </section>
      );

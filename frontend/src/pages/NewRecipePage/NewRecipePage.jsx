@@ -1,5 +1,5 @@
 import NewRecipeForm from "../../components/NewRecipeForm/NewRecipeForm";
-import NewIngredientsForm from "../../components/NewIngredientsForm/NewIngredientsForm";
+
 
 const NewRecipePage = (props) => {
 

@@ -68,6 +68,20 @@ def get_all_ingredients_of_recipe(request, pk):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_lastest_recipe(request):
+    latest_recipe = Recipe.objects.latest('id')
+    latest_id = latest_recipe.id
+
+    return Response(latest_id, status=status.HTTP_200_OK)
+
+
+
+
+
+
+
 # # @api_view(['POST'])
 # # @permission_classes([IsAuthenticated])
 # # def add_recipe(request):
