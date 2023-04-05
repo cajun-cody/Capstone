@@ -16,7 +16,7 @@ class Recipe(models.Model):
     description = models.TextField()
     ingredients = models.ManyToManyField(Ingredient)
     instructions = models.TextField()
-    image = models.ImageField(upload_to=upload_to,blank=True, null=True)
+    image = models.ImageField(upload_to=upload_to,blank=True, default="images/No_Image_Found.jpg", null=True)
     serving_size = models.PositiveIntegerField(default=1)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
     

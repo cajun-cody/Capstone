@@ -24,6 +24,7 @@ def recipe_list(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def add_basic_recipe(request):
+    print(request.data)
     serializer = RecipeSerializer(data=request.data)
     parser_classes = (MultiPartParser, FormParser) #required to automatically parse out form-data-data
     if serializer.is_valid():

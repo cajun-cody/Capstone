@@ -18,40 +18,7 @@ const NewIngredientsForm = ({recipeId}) => {
     //State to hold all ingredients added and map out in return. 
     const [ingredients, setIngredients] = useState([]);
     
-    //Grab the RecipeID for the basic recipe that was recently created. 
-    // async function getNewRecipeId() {
-    //     try {
-    //         let recipeID = await axios.get('http://127.0.0.1:8000/api/recipes/just_id/',
-    //         {headers: {Authorization: "Bearer " + token}}
-    //         );
-    //         console.log(recipeID)
-    //         setRecipeID(recipeID)
-    //     } catch (error) {
-    //     console.error(error);
-    //     }
-    // }
-    // useEffect(() => {
-    //     getNewRecipeId();
-    // }, []);
 
-    // async function addNewRecipeIngredient() {
-    //     try {
-    //         let ingredientResponse = await axios.post(`http://127.0.0.1:8000/api/ingredients/`,
-    //         {headers: {Authorization: "Bearer " + token}}
-    //         );
-
-    //         let recipeIngredientResponse = await axios.post(`http://127.0.0.1:8000/api/recipe_ingredient/${props.recipeID}/ingredients/${newIngredient.id}/`,
-    //         {headers: {Authorization: "Bearer " + token}}
-    //         );  
-            
-            
-    //         console.log(ingredientResponse)
-    //         console.log (recipeIngredientResponse)
-
-    //     }catch (error) {
-    //         console.error(error);
-    //     }
-    // }
     //Function to add a new RecipeIngredient and pass into the url the RecipeID and the user input for ingredient.
     async function addNewRecipeIngredient() {
         try {
@@ -86,7 +53,7 @@ const NewIngredientsForm = ({recipeId}) => {
 
     async function listIngredients() {
         try {
-            let ingredientsResponse = await axios.get(`http://127.0.0.1:8000/api/recipes/all_ingredients/${recipeId?.data}/`, {
+            let ingredientsResponse = await axios.get(`http://127.0.0.1:8000/api/recipes/all_ingredients/${recipeId}/`, {
             headers: {
                 Authorization: "Bearer " + token,
             },
@@ -102,6 +69,10 @@ const NewIngredientsForm = ({recipeId}) => {
         listIngredients();
     }, [])
 
+    const handleViewNewRecipe = (event) => {
+        // redirect the user to the recipe view page for the newly created recipe's ID
+        window.location.href = `/recipe/${recipeId}`;
+      };
     
     return ( 
         <section onSubmit={handleSubmit}>
@@ -120,20 +91,21 @@ const NewIngredientsForm = ({recipeId}) => {
                     <input type= 'text' value={ingredient} onChange={(event) => setIngredient(event.target.value)} />
                 </div>
                 <div className="new-recipe-btn">
-                    <button  type='submit' >Add Ingredient</button>
+                    <button  type='submit' onClick={refresh} >Add Ingredient</button>
                 </div>
             </form>
                 <div>
                     <p>Ingredients:</p>
-                    <ul style={{display:"flex",flexDirection:"column"}}>
+                    <ul style={{display:"flex",flexDirection:"column"}} >
                         {ingredients?.map(item => (
-                            <li key={item.name}>
+                            <li key={item}>
                                 {item.quantity} {item.units} of {item.ingredient_name}  
                             <br />
                             </li>
                         ))}
                     </ul>
                 </div>
+            <button onClick={handleViewNewRecipe}>View New Recipe</button>
         </section>
 
      );
@@ -141,4 +113,4 @@ const NewIngredientsForm = ({recipeId}) => {
  
 export default NewIngredientsForm;
 
-// onClick={refresh}
+// 
