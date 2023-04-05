@@ -27,8 +27,12 @@ def add_basic_recipe(request):
     serializer = RecipeSerializer(data=request.data)
     parser_classes = (MultiPartParser, FormParser) #required to automatically parse out form-data-data
     if serializer.is_valid():
-        serializer.save(user=request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        recipe = serializer.save(user=request.user)
+        data = {
+            'recipe_id': recipe.id,
+            'recipe': serializer.data
+        }
+        return Response(data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET','PUT','DELETE'])

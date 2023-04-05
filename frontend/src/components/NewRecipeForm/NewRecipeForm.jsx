@@ -16,7 +16,8 @@ const NewRecipeForm = (props) => {
     const [recipeInstructions, setRecipeInstructions] = useState('');
     const [recipeServing_size, setRecipeServing_size] = useState('');
     const [recipeImage, setRecipeImage] = useState(null);
-
+    //Added
+    const [recipeId, setRecipeId]   = useState(null);//new state variable to hold state of recipe Id to pass into recipe ingredients form.
 
     const [user, token] = useAuth();
 
@@ -27,14 +28,15 @@ const NewRecipeForm = (props) => {
             {headers: {Authorization: "Bearer " + token, "Content-Type": "multipart/form-data"}}
         );
         console.log(response.data);
+        // setRecipeId(response.data.id) //Set state of recipe id.
+        if (response.status == 201){
+            navigate(`/addIngredients/${response.data.recipe_id}`)
+        }
     } catch (error) {
         console.log(error.response.data);
         }
     }
 
-    function navToAddIngredients () {
-        navigate('/addIngredients')
-    }
 
 
     async function handleSubmit(event) {
@@ -49,8 +51,11 @@ const NewRecipeForm = (props) => {
         formData.append("image", recipeImage? recipeImage : noimage);
         formData.append("user_id", user.id);
         
+        //Add recipe Id to the form data
+        formData.append("recipe_id", recipeId)
+
         // await addNewIngredient(formData);
-        addNewRecipe(formData).then(() => navToAddIngredients());
+        await addNewRecipe(formData)
     }
     
 
