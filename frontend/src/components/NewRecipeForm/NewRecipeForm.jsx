@@ -2,7 +2,7 @@ import axios from "axios";
 import React, {useEffect, useState} from "react";
 import useAuth from "../../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
-import Noimage from '../../Images/No-Image-Found.jpg';
+
 // import CreatableSelect from 'react-select/creatable';
 
 
@@ -59,9 +59,7 @@ const NewRecipeForm = (props) => {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        // if(!recipeImage){
-        //     setRecipeImage( new File([Noimage], "No-Image-Found.jpg",{type:"image/jpg"}))
-        // }
+
         const formData = new FormData();
         // debugger
         formData.append("title", recipeTitle);
@@ -72,7 +70,7 @@ const NewRecipeForm = (props) => {
         // formData.append("image", recipeImage);
         formData.append("image", recipeImage);
         formData.append("user_id", user.id);
-        //Add recipe Id to the form data
+
         //Add category to form data
         formData.append("category_id", recipeCategory);
         

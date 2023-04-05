@@ -4,7 +4,7 @@ import React, {useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import CommentForm from "../CommentForm/CommentForm";
 import CommentList from "../CommentList/CommentList";
-
+import { useNavigate } from "react-router-dom";
 
 //Component to fetch a single recipe and display it. 
 const RecipeDisplay = (props) => {
@@ -12,6 +12,8 @@ const RecipeDisplay = (props) => {
     const [recipe, setRecipe] = useState()
     const [ingredients, setIngredients] = useState()
     const [user, token] = useAuth();
+
+    const navigate = useNavigate();
     
     //Async function to get a single recipe by Id and also get the ingredient objects(name, quantity and units)
     async function getRecipeById() {
@@ -97,6 +99,24 @@ const RecipeDisplay = (props) => {
             }
             };
 
+    //Delete a recipe by Id.
+    async function deleteRecipe(recipe) {
+        try {
+            let response = await axios.delete(`http://127.0.0.1:8000/api/recipes/${props.recipeId}/`,
+            {
+            headers: {Authorization: "Bearer " + token,}
+            }
+        );        
+        alert("Recipe is Deleted!")
+        console.log(response.status) 
+        if (response.status === 204) {
+            navigate(`/myrecipes`)
+        }
+        }catch (error) {
+            console.log(error.response.data)
+        }
+    }
+
     return ( 
         <div>
             <div>This is my recipe!</div>
@@ -128,7 +148,13 @@ const RecipeDisplay = (props) => {
             </div>:null}
             <h5>Instructions: {recipe?.instructions}</h5>
             <h5>Recipe added by: {recipe?.user.username.charAt(0).toUpperCase() + recipe?.user.username.slice(1)}</h5>
-            {user?.id===recipe?.user.id?<p>You Made this!</p>: null}
+            {user?.id===recipe?.user.id? (
+                <div>
+                    <p>You Made this!</p>
+                    <button type='button' className="btn btn-outline-danger" onClick={() => deleteRecipe(recipe)}>Delete Recipe</button>
+                    <button>Edit Recipe</button>
+                </div>
+            ): null}            
             <div className="comment-container">
                 <div className="comment-form">
                         <CommentForm recipe_id={recipe?.id} />
