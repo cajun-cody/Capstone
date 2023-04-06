@@ -35,7 +35,7 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path='/editRecipe/:recipeId' element={<EditRecipePage />} />
+        <Route path='/editRecipe' element={<EditRecipePage />} />
         <Route path='/addIngredients/:recipeId' element={<AddIngredientsPage />} />
         <Route path='/newrecipe' element={<NewRecipePage/>} />
         <Route path='/myrecipes' element={<MyRecipesPage/>} />

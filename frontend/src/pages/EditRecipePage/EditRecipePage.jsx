@@ -1,13 +1,13 @@
-import { useParams } from "react-router-dom";
-import EditRecipeForm from "../../components/EditRecipeForm/EditRecipeForm";
 
+import EditRecipeForm from "../../components/EditRecipeForm/EditRecipeForm";
+import { useLocation } from "react-router-dom";
 
 const EditRecipePage = (props) => {
-    const {recipeId} = useParams();
-    console.log("EditRecipePage", recipeId)
+    const {state} = useLocation();
+    
     return ( 
         <section>
-            <EditRecipeForm recipeId={recipeId} />
+            <EditRecipeForm recipe={state.recipe} ingredients={state.ingedients} />
         </section>
      );
 }

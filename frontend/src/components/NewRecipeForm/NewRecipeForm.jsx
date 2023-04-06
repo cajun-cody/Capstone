@@ -22,6 +22,7 @@ const NewRecipeForm = (props) => {
 
     const [user, token] = useAuth();
 
+    //Function to get a list of categories for a dropdown list to choose from.
     useEffect(() => {
         const getCategories = async () => {
             try {
@@ -48,7 +49,7 @@ const NewRecipeForm = (props) => {
         );
         console.log(response.data);
         // setRecipeId(response.data.id) //Set state of recipe id.
-        if (response.status == 201){
+        if (response.status === 201){
             navigate(`/addIngredients/${response.data.recipe_id}`)
         }
     } catch (error) {
@@ -119,7 +120,7 @@ const NewRecipeForm = (props) => {
                     <input type= 'file' onChange={(event) => setRecipeImage(event.target.files[0])} accept="image/jpeg,image/png,image/gif" />
                 </div>
                 <div className="new-recipe-btn">
-                    <button class='btn btn-outline-success' type='submit'>Add Recipe Ingredients</button>
+                    <button className='btn btn-outline-success' type='submit'>Add Recipe Ingredients</button>
                 </div>
             </form>
         </section>
