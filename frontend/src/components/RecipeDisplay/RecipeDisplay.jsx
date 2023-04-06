@@ -14,6 +14,8 @@ const RecipeDisplay = (props) => {
     const [user, token] = useAuth();
 
     const navigate = useNavigate();
+
+
     
     //Async function to get a single recipe by Id and also get the ingredient objects(name, quantity and units)
     async function getRecipeById() {
@@ -99,6 +101,12 @@ const RecipeDisplay = (props) => {
             }
             };
 
+    //Navigate routed to EditRecipePage
+    const navToEditRecipe = () => {
+        navigate(`/editRecipe/${recipe.id}`);
+    }
+
+
     //Delete a recipe by Id.
     async function deleteRecipe(recipe) {
         try {
@@ -152,7 +160,7 @@ const RecipeDisplay = (props) => {
                 <div>
                     <p>You Made this!</p>
                     <button type='button' className="btn btn-outline-danger" onClick={() => deleteRecipe(recipe)}>Delete Recipe</button>
-                    <button>Edit Recipe</button>
+                    <button onClick={navToEditRecipe}>Edit Recipe</button>
                 </div>
             ): null}            
             <div className="comment-container">

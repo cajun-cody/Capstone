@@ -18,7 +18,6 @@ const NewRecipeForm = (props) => {
     const [recipeServing_size, setRecipeServing_size] = useState('');
     const [recipeImage, setRecipeImage] = useState(['']);
     const [recipeId, setRecipeId]   = useState(null);//new state variable to hold state of recipe Id to pass into recipe ingredients form.
-    //Added
     const [categories, setCategories] = useState([]);
 
     const [user, token] = useAuth();
