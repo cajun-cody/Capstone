@@ -114,17 +114,21 @@ const RecipeDisplay = (props) => {
   //Delete a recipe by Id.
   async function deleteRecipe(recipe) {
     try {
-      let response = await axios.delete(
-        `http://127.0.0.1:8000/api/recipes/${props.recipeId}/`,
-        {
-          headers: { Authorization: "Bearer " + token },
+        const confirmed = window.confirm("Are you sure you want to delete this recipe?")
+        if (confirmed) {
+            let response = await axios.delete(
+            `http://127.0.0.1:8000/api/recipes/${props.recipeId}/`,
+            {
+            headers: { Authorization: "Bearer " + token },
+            }
+            );
+            alert("Recipe is Deleted!");
+            console.log(response.status);
+            if (response.status === 204) {
+            navigate(`/myrecipes`);
+            } 
         }
-      );
-      alert("Recipe is Deleted!");
-      console.log(response.status);
-      if (response.status === 204) {
-        navigate(`/myrecipes`);
-      }
+       
     } catch (error) {
       console.log(error.response.data);
     }
