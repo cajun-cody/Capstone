@@ -142,6 +142,7 @@ const EditRecipeForm = (props) => {
                         ))}
                     </ul>
                 </div>
+
                 <h5>Instructions: 
                     <input type="text" placeholder={props.recipe?.instructions} onChange={(event) => setRecipeInstructions(event.target.value)}/>
                 </h5> 

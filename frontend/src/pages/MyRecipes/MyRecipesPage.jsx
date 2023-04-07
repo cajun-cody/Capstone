@@ -3,6 +3,8 @@ import RecipeList from "../../components/Recipes/RecipesList/RecipeList";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import NewRecipeForm from "../../components/NewRecipeForm/NewRecipeForm";
+import "./MyRecipesPage.css";
+
 
 const MyRecipesPage = () => {
 
@@ -32,8 +34,9 @@ const MyRecipesPage = () => {
 
     return ( 
         <section>
-            <div>This Is My Recipe Page</div>
-            <a href="http://localhost:3000/newrecipe/">Click to Add New Recipe</a>
+            <div className="add-recipe-link">
+                <a href="http://localhost:3000/newrecipe/">Click to Add New Recipe</a>
+            </div>
             <RecipeList recipes={recipes}/>
         </section>
      );

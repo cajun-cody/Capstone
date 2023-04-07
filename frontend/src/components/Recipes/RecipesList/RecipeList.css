@@ -1,0 +1,25 @@
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+  }
+  
+  .grid-thumbnail {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .grid-thumbnail a {
+    width: calc(33.33% - 10px);
+  }
+
+  .recipelist-header {
+    display: flex;
+    margin-bottom: 10px;
+    font-size: x-large;
+    text-shadow: var(--main-color-r) 2px 0 10px;
+    justify-content: center;
+    font-weight: bolder;
+  }

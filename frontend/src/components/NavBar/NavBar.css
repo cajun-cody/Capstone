@@ -8,24 +8,28 @@ li {
   font-size: 1.25rem;
 }
 
+.h1 {
+  color:var(--main-color-y)
+}
+
 .navBar {
-  background: steelblue;
+  color: var(--main-color-y);
+  background: var(--main-color-b);
   box-shadow: 4px 2px 5px gray;
-  color: white;
   margin-bottom: 2rem;
   padding: 1.5rem 2rem;
 }
 
 .navBar button {
   background: transparent;
-  border: 2px solid white;
-  color: white;
+  border: 2px solid var(--main-color-y);
+  color: var(--main-color-w);
   padding: 0.4rem 0.5rem;
 }
 
 .navBar button:hover {
-  background: white;
-  color: steelblue;
+  background: var(--main-color-y);
+  color: var(--main-color-b);
   cursor: pointer;
 }
 

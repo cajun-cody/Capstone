@@ -1,0 +1,56 @@
+
+.add-recipe-link {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .add-recipe-link a {
+    display: inline-block;
+    position: relative;
+    color: var(--main-color-w);
+    text-decoration: none;
+    background-color: var(--main-color-b);
+    padding: 10px 20px;
+    border-radius: 50px;
+    overflow: hidden;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  .add-recipe-link a::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--main-color-y);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1.0);
+  }
+  
+  .add-recipe-link a:hover {
+    animation: none;
+    background-color: var(--main-color-y);
+    color: var(--main-color-r);
+  }
+  
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  
+
+
+  

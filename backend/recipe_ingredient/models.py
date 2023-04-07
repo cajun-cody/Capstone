@@ -7,7 +7,7 @@ from ingredients.models import Ingredient
 class RecipeIngredient(models.Model):
     recipe_id = models.ForeignKey(Recipe, on_delete=models.CASCADE) #Should I use SET_NULL?
     ingredient_id = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    quantity = models.IntegerField(null=True)
+    quantity = models.IntegerField(blank=True, null=True)
     units = models.CharField(max_length=200)
     
     # class Meta:
