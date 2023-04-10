@@ -6,6 +6,15 @@
     font-weight: bold;
   }
   
+  .recipe-header {
+    display: flex;
+    margin-bottom: 10px;
+    font-size: xx-large;
+    text-shadow: var(--main-color-r) 2px 0 10px;
+    justify-content: center;
+    font-weight: bolder;
+  }
+
   .add-recipe-link a {
     display: inline-block;
     position: relative;

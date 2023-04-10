@@ -2,6 +2,7 @@
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import React, {useState, useEffect} from "react";
+import "./NewIngredientsForm.css";
 
 
 const NewIngredientsForm = ({recipeId}) => {
@@ -75,27 +76,27 @@ const NewIngredientsForm = ({recipeId}) => {
       };
     
     return ( 
-        <section onSubmit={handleSubmit}>
-            <div>This is where you add recipe ingredients.</div>
-            <form className="recipe-ingredient-container" >
+        <section className="add-ingredient-section" onSubmit={handleSubmit}>
+            <h1 className="recipe-header">Meh, add you ingredients right der!</h1>
+            <form className="add-ingredient-container" >
                 <div className="user-inputs">
                     <label>Quantity</label>
-                    <input type= 'text' value={ingredientQuantity} onChange={(event) => setIngredientQuantity(event.target.value)} />
+                    <input type='number' value={ingredientQuantity} onChange={(event) => setIngredientQuantity(event.target.value)} />
                 </div>
                 <div className="user-inputs">
                     <label>Units</label>
-                    <input type= 'text' value={ingredientUnits} onChange={(event) => setIngredientUnits(event.target.value)} />
+                    <input type='text' value={ingredientUnits} onChange={(event) => setIngredientUnits(event.target.value)} />
                 </div>
                 <div className="user-inputs">
                     <label>Ingredient</label>
-                    <input type= 'text' value={ingredient} onChange={(event) => setIngredient(event.target.value)} />
+                    <input type='text' value={ingredient} onChange={(event) => setIngredient(event.target.value)} />
                 </div>
-                <div className="new-recipe-btn">
-                    <button  type='submit' onClick={refresh} >Add Ingredient</button>
+                <div className="new-ingredient-btn">
+                    <button className="add-recipe-button" type='submit' onClick={refresh} >Add Ingredient</button>
                 </div>
-            </form>
-                <div>
-                    <p>Ingredients:</p>
+            </form >
+                <div className="added-ingredients-list-container">
+                    <h3 className="list-of-ingredients">Added Ingredients:</h3>
                     <ul style={{display:"flex",flexDirection:"column"}} >
                         {ingredients?.map(item => (
                             <li key={item}>
@@ -105,7 +106,7 @@ const NewIngredientsForm = ({recipeId}) => {
                         ))}
                     </ul>
                 </div>
-            <button onClick={handleViewNewRecipe}>View New Recipe</button>
+            <button className="add-recipe-button" onClick={handleViewNewRecipe}>View New Recipe</button>
         </section>
 
      );

@@ -160,7 +160,7 @@ const RecipeDisplay = (props) => {
   return (
     <div className="recipe-container">
 
-      <h1 className="recipe-title">{recipe?.title}</h1>
+      <h1 className="recipe-header">{recipe?.title}</h1>
       <img className="recipe-image" src={`http://127.0.0.1:8000${recipe?.image}/`} alt="" />
       
       <div className="recipe-details">

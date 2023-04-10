@@ -55,11 +55,12 @@ section {
   
   .recipe-textarea {
     width: 100%;
-    height: 200px;
+    min-height: 200px;
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 5px;
     resize: vertical;
+    caret-color: var(--main-color-b);
   }
   
   .add-recipe-btn-section {

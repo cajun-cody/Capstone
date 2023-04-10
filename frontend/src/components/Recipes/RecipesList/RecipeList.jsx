@@ -15,7 +15,7 @@ const [recipes, setRecipes] = useState()
 //Mapper includes a link in the list of recipes. The link has a path to the recipe display page.
 return ( 
     <div className="gird-container">
-        <div className="recipelist-header">My recipes</div>
+        
         <div className="grid-thumbnail">
              {props.recipes&&props.recipes.map( item => <Link to={`/recipe/${item.id}`} onClick={() => setRecipes(item.id)}>
              <RecipeTile  key={item.id} recipe={item} />

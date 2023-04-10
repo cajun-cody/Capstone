@@ -83,7 +83,7 @@ const NewRecipeForm = (props) => {
 
     return ( 
         <section className="new-recipe-section">
-            <div className="add-recipe-title">Wat's Dat on da Stove?</div>
+            <div className="recipe-header">Wat We Cookin??</div>
             <form className="recipe-form-container" onSubmit={e=>handleSubmit(e)}>
                 <div className="user-inputs">
                     <label>Title</label>
@@ -106,11 +106,11 @@ const NewRecipeForm = (props) => {
                 </div>
                 <div className="user-inputs">
                     <label>Description</label>
-                    <input className="recipe-textarea" type= 'text' value={recipeDescription} onChange={(event) => setRecipeDescription(event.target.value)} />
+                    <textarea className="recipe-textarea" type= 'text' value={recipeDescription} onChange={(event) => setRecipeDescription(event.target.value)} />
                 </div>
                 <div className="user-inputs">
                     <label>Instructions</label>
-                    <input className="recipe-textarea" type= 'text' value={recipeInstructions} onChange={(event) => setRecipeInstructions(event.target.value)} />
+                    <textarea className="recipe-textarea" type= 'text' value={recipeInstructions} onChange={(event) => setRecipeInstructions(event.target.value)} />
                 </div>
                 <div className="user-inputs">
                     <label>Servings</label>
