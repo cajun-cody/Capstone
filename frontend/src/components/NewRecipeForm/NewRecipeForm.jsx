@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
 import useAuth from "../../hooks/useAuth";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "./NewRecipeForm.css";
 
 // import CreatableSelect from 'react-select/creatable';
 
@@ -81,20 +82,20 @@ const NewRecipeForm = (props) => {
     
 
     return ( 
-        <section>
-            <div>Add a new recipe!</div>
+        <section className="new-recipe-section">
+            <div className="add-recipe-title">Wat's Dat on da Stove?</div>
             <form className="recipe-form-container" onSubmit={e=>handleSubmit(e)}>
                 <div className="user-inputs">
                     <label>Title</label>
-                    <input type= 'text' value={recipeTitle} onChange={(event) => setRecipeTitle(event.target.value)} />
+                    <input className="recipe-input" type= 'text' value={recipeTitle} onChange={(event) => setRecipeTitle(event.target.value)} />
                 </div>
                 <div className="user-inputs">
                     <label>Home Chef</label>
-                    <input type= 'text' value={recipeHome_chef} onChange={(event) => setRecipeHome_chef(event.target.value)} />
+                    <input className="recipe-input" type= 'text' value={recipeHome_chef} onChange={(event) => setRecipeHome_chef(event.target.value)} />
                 </div>
                 <div className="user-inputs">
                     <label>Category</label>
-                    <select value={recipeCategory} onChange={(event) => setRecipeCategory(event.target.value)}> 
+                    <select className="recipe-select" value={recipeCategory} onChange={(event) => setRecipeCategory(event.target.value)}> 
                         <option value="">Select a category</option>
                         {categories.map((category) => (
                         <option key={category.id} value={category.id}>
@@ -105,22 +106,22 @@ const NewRecipeForm = (props) => {
                 </div>
                 <div className="user-inputs">
                     <label>Description</label>
-                    <input type= 'text' value={recipeDescription} onChange={(event) => setRecipeDescription(event.target.value)} />
+                    <input className="recipe-textarea" type= 'text' value={recipeDescription} onChange={(event) => setRecipeDescription(event.target.value)} />
                 </div>
                 <div className="user-inputs">
                     <label>Instructions</label>
-                    <input type= 'text' value={recipeInstructions} onChange={(event) => setRecipeInstructions(event.target.value)} />
+                    <input className="recipe-textarea" type= 'text' value={recipeInstructions} onChange={(event) => setRecipeInstructions(event.target.value)} />
                 </div>
                 <div className="user-inputs">
                     <label>Servings</label>
-                    <input type= 'text' value={recipeServing_size} onChange={(event) => setRecipeServing_size(event.target.value)} />
+                    <input className="recipe-input" type= 'number' value={recipeServing_size} onChange={(event) => setRecipeServing_size(event.target.value)} />
                 </div>
                 <div className="user-inputs">
                     <label>Image</label>
-                    <input type= 'file' onChange={(event) => setRecipeImage(event.target.files[0])} accept="image/jpeg,image/png,image/gif" />
+                    <input className="recipe-input" type= 'file' onChange={(event) => setRecipeImage(event.target.files[0])} accept="image/jpeg,image/png,image/gif" />
                 </div>
-                <div className="new-recipe-btn">
-                    <button className='btn btn-outline-success' type='submit'>Add Recipe Ingredients</button>
+                <div className="add-recipe-btn-section">
+                    <button className='add-recipe-button' type='submit'>Add Recipe Ingredients</button>
                 </div>
             </form>
         </section>

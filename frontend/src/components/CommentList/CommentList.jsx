@@ -28,6 +28,7 @@ const CommentList = (props) => {
 
     return ( 
         <div className="comment-list">
+            <h4>Comments</h4>
             {comments&&comments.map( item => <Comment key={item.id}comment={item}/>)}
         </div>
 

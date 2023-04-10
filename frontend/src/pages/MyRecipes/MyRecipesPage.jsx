@@ -33,12 +33,14 @@ const MyRecipesPage = () => {
 
 
     return ( 
-        <section>
+        <>
             <div className="add-recipe-link">
                 <a href="http://localhost:3000/newrecipe/">Click to Add New Recipe</a>
             </div>
             <RecipeList recipes={recipes}/>
-        </section>
+        </>
+
+
      );
 }
  

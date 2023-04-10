@@ -7,6 +7,7 @@ import CommentList from "../CommentList/CommentList";
 import { useNavigate } from "react-router-dom";
 import "./RecipeDisplay.css";
 import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 //Component to fetch a single recipe and display it.
 const RecipeDisplay = (props) => {
@@ -106,33 +107,25 @@ const RecipeDisplay = (props) => {
     }
   };
 
-  //Function to Print a Recipe to pdf. 
-  const handlePrintRecipe = () => {
-    const doc = new jsPDF();
-  
-    // Add recipe information to PDF
-    doc.text(recipe.title, 10, 10);
-    doc.text(`Chef: ${recipe.home_chef}`, 10, 20);
-    doc.text(`Description: ${recipe.description}`, 10, 30);
-    doc.text(`Category: ${recipe.category.category}`, 10, 40);
-    doc.text(`Recipe Servings: ${recipe.serving_size}`, 10, 50);
-    doc.text("Ingredients:", 10, 60);
-  
-    // Loop through ingredients and add them to PDF
-    let y = 70;
-    for (const ingredient of ingredients) {
-      doc.text(
-        `${ingredient.ingredient_name} - ${ingredient.quantity} ${ingredient.units}`,
-        10,
-        y
-      );
-      y += 10;
-    }
-  
-    // Save PDF
-    doc.save("recipe.pdf");
-  };
-  
+//Function to print recipe.
+// const printRecipe = async () => {
+//   try {
+//     const element = document.getElementById('element-to-print');
+//     console.log(element)
+//     const canvas = await html2canvas(element);
+//     const pdf = new jsPDF('p', 'mm', [canvas.width, canvas.height]);
+//     pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, canvas.width, canvas.height);
+//     pdf.save('recipe.pdf');
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+// //click event listener to the button
+// const printBtn = document.querySelector('#print-btn');
+// printBtn.addEventListener('click', printRecipe);
+ 
+ 
 
   //Navigate routed to EditRecipePage using edit button in form
   const navToEditRecipe = (recipeObject) => {
@@ -166,62 +159,76 @@ const RecipeDisplay = (props) => {
 
   return (
     <div className="recipe-container">
-      <div>This is my recipe!</div>
-      <h3>{recipe?.title}</h3>
-      <img src={`http://127.0.0.1:8000${recipe?.image}/`} alt="" />
-      <h4>Chef: {recipe?.home_chef}</h4>
-      <h5>Description: {recipe?.description}</h5>
-      <h5>Category: {recipe?.category.category}</h5>
-      <h5>Recipe Servings: {recipe?.serving_size}</h5>
-      <h5 className="changeservings-section">
-        Change Servings:
+
+      <h1 className="recipe-title">{recipe?.title}</h1>
+      <img className="recipe-image" src={`http://127.0.0.1:8000${recipe?.image}/`} alt="" />
+      
+      <div className="recipe-details">
+        <span className="recipe-detail">Chef: {recipe?.home_chef}</span>
+        <span className="recipe-detail">Category: {recipe?.category.category}</span>
+        <span className="recipe-detail">Servings: {recipe?.serving_size}</span>
+      </div>
+      <p className="recipe-description">Description: {recipe?.description}</p>
+      
+      <div className="recipe-servings">
+        <h2>Change Servings</h2>
+        <label htmlFor="servings" className="servings-label">
+        Servings:
+      </label>
         <input
+          id="servings"
+          name="servings"
           type="number"
           value={inputValue}
+          className="servings-input"
           min="1"
           onChange={handleServingsChange}
         />
-      </h5>
+      </div>
+
       {servings ? (
-        <div className="ingredients-section">
-          <p>Ingredients:</p>
+        <div className="recipe-ingredients">
+          <h2>Ingredients:</h2>
           <ul className="ingredients-list" style={{ display: "flex", flexDirection: "column" }}>
             {ingredients?.map((item) => (
               <li key={item.name}>
-                {item.quantity} {item.units} of {item.ingredient_name}
+                {item.quantity} {item.units} of <span className="ingredient-name">{item.ingredient_name}</span>
                 <br />
               </li>
             ))}
           </ul>
         </div>
       ) : null}
-      <h5 className="instructions-section">Instructions: {recipe?.instructions}</h5>
-      <h5>
-        Recipe added by:{" "}
-        {recipe?.user.username.charAt(0).toUpperCase() +
+      <div className="recipe-creator">
+        <h3>
+          Recipe added by:{" "}
+          {recipe?.user.username.charAt(0).toUpperCase() +
           recipe?.user.username.slice(1)}
-      </h5>
-      <div>
-        <button className="print-btn" onClick={handlePrintRecipe}>Print Recipe</button>
-      </div> 
+        </h3>
+        <div>
+          <button className="button" id="print-btn">Print Recipe</button>
+        </div>
+      </div>
+      <h3>Instructions: </h3>
+      <h5 className="recipe-instructions">{recipe?.instructions}</h5>
+ 
       {user?.id === recipe?.user.id ? (
-        <div className="conditonal-btns">
+        <div className="conditional-btns">
           <button
             type="button"
-            className="btn btn-outline-danger"
+            className="delete-button"
             onClick={() => deleteRecipe(recipe)}
           >
             Delete Recipe
           </button>
-          <button onClick={() => navToEditRecipe(recipe)}>Edit Recipe</button>
+          <button className="button" onClick={() => navToEditRecipe(recipe)}>Edit Recipe</button>
         </div>
       ) : null}
       <div className="comment-container">
         <div className="comment-form">
           <CommentForm recipe_id={recipe?.id} />
         </div>
-        <div className="comment-section">
-          <h3 className="h3">Comments</h3>
+        <div className="comments-section">
           <CommentList recipe_id={recipe?.id} />
         </div>
       </div>

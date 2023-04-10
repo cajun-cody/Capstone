@@ -1,0 +1,37 @@
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .comment-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .post-input {
+    display: flex;
+  }
+  
+  .post-input .input {
+    flex: 1;
+    padding: 10px;
+    border: solid var(--main-color-b);
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  .comment-btn {
+    background-color: var(--main-color-b);
+    color: var(--main-color-w);
+    padding: 10px;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .comment-btn:hover {
+    background-color: var(--main-color-y);
+  }
+  

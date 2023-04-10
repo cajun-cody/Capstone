@@ -1,0 +1,87 @@
+
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background-image: url("../../Images/AcadianFlag.png"); */
+    
+  }
+  
+  .add-recipe-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .recipe-form-container {
+    display: flex;
+    flex-direction: column;
+    width: 150%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 1rem;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-inputs {
+    margin: 1rem 0;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .recipe-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .recipe-select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  .recipe-textarea {
+    width: 100%;
+    height: 200px;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+  }
+  
+  .add-recipe-btn-section {
+    display: flex;
+    justify-content: center;
+  }
+
+  .add-recipe-button {
+    display: flex;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--main-color-w);
+    background-color: var(--main-color-b);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+
+  
