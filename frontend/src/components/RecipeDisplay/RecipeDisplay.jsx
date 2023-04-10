@@ -5,6 +5,8 @@ import useAuth from "../../hooks/useAuth";
 import CommentForm from "../CommentForm/CommentForm";
 import CommentList from "../CommentList/CommentList";
 import { useNavigate } from "react-router-dom";
+import "./RecipeDisplay.css";
+import jsPDF from "jspdf";
 
 //Component to fetch a single recipe and display it.
 const RecipeDisplay = (props) => {
@@ -104,6 +106,34 @@ const RecipeDisplay = (props) => {
     }
   };
 
+  //Function to Print a Recipe to pdf. 
+  const handlePrintRecipe = () => {
+    const doc = new jsPDF();
+  
+    // Add recipe information to PDF
+    doc.text(recipe.title, 10, 10);
+    doc.text(`Chef: ${recipe.home_chef}`, 10, 20);
+    doc.text(`Description: ${recipe.description}`, 10, 30);
+    doc.text(`Category: ${recipe.category.category}`, 10, 40);
+    doc.text(`Recipe Servings: ${recipe.serving_size}`, 10, 50);
+    doc.text("Ingredients:", 10, 60);
+  
+    // Loop through ingredients and add them to PDF
+    let y = 70;
+    for (const ingredient of ingredients) {
+      doc.text(
+        `${ingredient.ingredient_name} - ${ingredient.quantity} ${ingredient.units}`,
+        10,
+        y
+      );
+      y += 10;
+    }
+  
+    // Save PDF
+    doc.save("recipe.pdf");
+  };
+  
+
   //Navigate routed to EditRecipePage using edit button in form
   const navToEditRecipe = (recipeObject) => {
     navigate(`/editRecipe`, {
@@ -135,7 +165,7 @@ const RecipeDisplay = (props) => {
   }
 
   return (
-    <div>
+    <div className="recipe-container">
       <div>This is my recipe!</div>
       <h3>{recipe?.title}</h3>
       <img src={`http://127.0.0.1:8000${recipe?.image}/`} alt="" />
@@ -143,7 +173,7 @@ const RecipeDisplay = (props) => {
       <h5>Description: {recipe?.description}</h5>
       <h5>Category: {recipe?.category.category}</h5>
       <h5>Recipe Servings: {recipe?.serving_size}</h5>
-      <h5>
+      <h5 className="changeservings-section">
         Change Servings:
         <input
           type="number"
@@ -153,9 +183,9 @@ const RecipeDisplay = (props) => {
         />
       </h5>
       {servings ? (
-        <div>
+        <div className="ingredients-section">
           <p>Ingredients:</p>
-          <ul style={{ display: "flex", flexDirection: "column" }}>
+          <ul className="ingredients-list" style={{ display: "flex", flexDirection: "column" }}>
             {ingredients?.map((item) => (
               <li key={item.name}>
                 {item.quantity} {item.units} of {item.ingredient_name}
@@ -165,15 +195,17 @@ const RecipeDisplay = (props) => {
           </ul>
         </div>
       ) : null}
-      <h5>Instructions: {recipe?.instructions}</h5>
+      <h5 className="instructions-section">Instructions: {recipe?.instructions}</h5>
       <h5>
         Recipe added by:{" "}
         {recipe?.user.username.charAt(0).toUpperCase() +
           recipe?.user.username.slice(1)}
       </h5>
+      <div>
+        <button className="print-btn" onClick={handlePrintRecipe}>Print Recipe</button>
+      </div> 
       {user?.id === recipe?.user.id ? (
-        <div>
-          <p>You Made this!</p>
+        <div className="conditonal-btns">
           <button
             type="button"
             className="btn btn-outline-danger"
