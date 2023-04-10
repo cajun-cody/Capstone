@@ -28,6 +28,7 @@
     font-size: xx-large;
     padding-left: 2rem;
     margin-right: 2rem;
+    text-shadow: var(--main-color-r) 2px 0 10px;
 }
 
 .hero-section {
@@ -44,11 +45,19 @@
     font-size: x-large;
 }
 
+.option {
+    display: flex;
+    padding: 30px;
+    text-shadow: var(--main-color-r) 2px 0 10px;
+    color: black;
+}
+
 .home-pinch {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: large;
+    font-weight: bolder;
 }
 
 .pinch {

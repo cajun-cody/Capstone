@@ -19,12 +19,12 @@ const HomePage = () => {
         </section>
         <section className="hero-section">
             <div className="home-recipe-option">
-                <div>
+                <div className="option">
                     <h1>
                         <a href="http://localhost:3000/search/">Search All Recipes</a>
                     </h1>
                  </div>
-                <div className="sec-2">
+                <div className="option">
                     <h1>
                         <a href="http://localhost:3000/myrecipes/">My Recipes</a>
                     </h1>

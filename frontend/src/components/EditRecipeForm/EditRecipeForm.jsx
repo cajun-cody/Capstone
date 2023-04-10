@@ -101,39 +101,48 @@ const EditRecipeForm = (props) => {
 
 
     return ( 
-        <div>
-            <div>You Can Edit Recipe Here</div>
-            <form className="recipe-form-container" onSubmit={e=>handleSubmit(e)} >
-                <h3>Title: 
-                <input type="text" placeholder={props.recipe?.title} onChange={(event) => setRecipeTitle(event.target.value)}/>
-                </h3>
-                <div>
+        <div className="recipe-container">
+            <div className="recipe-header">You Can Edit Recipe Here</div>
+            <form className="recipe-edit-form-container" onSubmit={e=>handleSubmit(e)} >
+                <div className="user-inputs">
+                   <label>Title </label> 
+                    <input className="recipe-input" type="text" placeholder={props.recipe?.title} onChange={(event) => setRecipeTitle(event.target.value)}/>
+                </div>
+                <div className="user-inputs">
                     <img src={`http://127.0.0.1:8000${props.recipe?.image}/`} alt=''/>
                     <label>Change Image</label>
-                    <input type="file" onChange={(event) => setRecipeImage(event.target.files[0])} accept="image/jpeg,image/png,image/gif" />
+                    <input className="recipe-input" type="file" onChange={(event) => setRecipeImage(event.target.files[0])} accept="image/jpeg,image/png,image/gif" />
                 </div>
-                <h4>Chef: 
-                    <input type="text" placeholder={props.recipe?.home_chef} onChange={(event) => setRecipeHome_chef(event.target.value)}/>
-                </h4>
-                <h5>Description: 
-                    <input type="text" placeholder={props.recipe?.description} onChange={(event) => setRecipeDescription(event.target.value)}/>
-                </h5>
-                <h5>Category: 
-                <select  onChange={(event) => setRecipeCategory(event.target.value)}> 
+                <div className="user-inputs">
+                    <label>Home Chef </label>
+                    <input className="recipe-input" type="text" placeholder={props.recipe?.home_chef} onChange={(event) => setRecipeHome_chef(event.target.value)}/>   
+                </div>
+                <div className="user-inputs">
+                    <label>Category</label>
+                        <select className="recipe-select" onChange={(event) => setRecipeCategory(event.target.value)}> 
                             <option value={props.recipe?.category.id} >{props.recipe?.category.category}</option>
                             {categories.map((category) => (
                             <option key={category.id} value={category.id}>
                                 {category.category}
                             </option>
                             ))}
-                        </select>             
-                </h5>
-                <h5>Recipe Servings: 
-                    <input type="number" min="1" placeholder={props.recipe?.serving_size} onChange={(event) => setRecipeServing_size(parseInt(event.target.value))}/>
-                </h5>
-                <div>
-                    <p>Ingredients:</p>
-                    <ul style={{display:"flex",flexDirection:"column"}}>
+                        </select>               
+                </div>
+                <div className="user-inputs">
+                    <label>Description </label>
+                    <textarea className="recipe-textarea" type="text" placeholder={props.recipe?.description} onChange={(event) => setRecipeDescription(event.target.value)}/>
+                </div>
+                <div className="user-inputs">
+                    <label>Instructions </label> 
+                    <textarea className="recipe-textarea" type="text" placeholder={props.recipe?.instructions} onChange={(event) => setRecipeInstructions(event.target.value)}/>
+                </div>
+                <div className="user-inputs">
+                    <label>Recipe Servings </label>
+                    <input className="recipe-input" type="number" min="1" placeholder={props.recipe?.serving_size} onChange={(event) => setRecipeServing_size(parseInt(event.target.value))}/>
+                </div>
+                <div className="recipe-ingredients">
+                    <h2>Ingredients:</h2>
+                    <ul className="ingredients-list" style={{display:"flex",flexDirection:"column"}}>
                         {props.ingredients?.map(item => (
                             <li key={item.name}>
                                 {item.quantity} {item.units} of {item.ingredient_name}  
@@ -142,12 +151,8 @@ const EditRecipeForm = (props) => {
                         ))}
                     </ul>
                 </div>
-
-                <h5>Instructions: 
-                    <input type="text" placeholder={props.recipe?.instructions} onChange={(event) => setRecipeInstructions(event.target.value)}/>
-                </h5> 
-                <div className="new-recipe-btn">
-                    <button className='btn btn-outline-success' type='submit' >Update Recipe</button>
+                <div className="edit-recipe-btn">
+                    <button className='add-recipe-button' type='submit' >Update Recipe</button>
                 </div>
             </form>
         </div>

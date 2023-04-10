@@ -113,7 +113,7 @@ const NewRecipeForm = (props) => {
                     <textarea className="recipe-textarea" type= 'text' value={recipeInstructions} onChange={(event) => setRecipeInstructions(event.target.value)} />
                 </div>
                 <div className="user-inputs">
-                    <label>Servings</label>
+                    <label>Recipe Servings</label>
                     <input className="recipe-input" type= 'number' value={recipeServing_size} onChange={(event) => setRecipeServing_size(event.target.value)} />
                 </div>
                 <div className="user-inputs">
