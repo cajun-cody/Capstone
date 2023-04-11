@@ -1,6 +1,3 @@
-
-
-
 .recipe-container {
   max-width: 800px;
   margin: 0 auto;
@@ -47,6 +44,10 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+}
+
+.ingredients-list li strong {
+  margin-right: 15px;
 }
 
 .ingredient-name {
@@ -137,8 +138,6 @@
   background-color: var(--main-color-y);
 }
 
-
-
 /* Style for delete button */
 .delete-button {
   display: inline-block;
@@ -179,7 +178,7 @@
 
 .ingredient-delete {
   background-color: var(--main-color-r);
-  color:var(--main-color-w);
+  color: var(--main-color-w);
   padding: 5px 10px;
   border-radius: 5px;
   text-transform: uppercase;

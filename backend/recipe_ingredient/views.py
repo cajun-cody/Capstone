@@ -59,37 +59,6 @@ def add_ingredient_to_recipe(request, recipe_id, ingredient_name):
 
 
 
-
-
-#Updated 4/4/23 12:26
-# @api_view(['POST'])
-# @permission_classes([IsAuthenticated])
-# def add_ingredient_to_recipe(request, recipe_id=None, ingredient_id=None):
-#     # Get user input
-#     data = request.data
-#     units = data['units']
-#     quantity = data['quantity']
-
-#     # Check if the ingredient already exists
-#     ingredient_name = data['ingredient_name']
-#     ingredient, created = Ingredient.objects.get_or_create(name=ingredient_name)
-
-#     # Get recipe and create recipe_ingredient object
-#     recipe = get_object_or_404(Recipe, pk=recipe_id)
-#     recipe_ingredient_obj = RecipeIngredient.objects.create(
-#         recipe_id=recipe.id,
-#         ingredient_id=ingredient.id,
-#         units=units,
-#         quantity=quantity
-#     )
-
-#     # Serialize and return the created object
-#     serializer = RecipeIngredientSerializer(recipe_ingredient_obj)
-#     return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-
-
-
 @api_view(['GET','PUT','DELETE'])
 @permission_classes([IsAuthenticated])
 def get_recipe_ingredient_by_id(request, pk):

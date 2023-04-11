@@ -231,7 +231,8 @@ const RecipeDisplay = (props) => {
           >
             {ingredients?.map((item) => (
               <li key={item.id}>
-                {item.quantity} {item.units} of{" "}
+                <strong>{item.quantity}</strong>
+                {item.units} of{" "}
                 <span className="ingredient-name">{item.ingredient_name}</span>
                 {user?.id === recipe?.user.id ? (
                   <button

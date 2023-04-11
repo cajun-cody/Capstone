@@ -85,6 +85,7 @@ const NewIngredientsForm = ({ recipeId }) => {
           <label>Quantity</label>
           <input
             type="number"
+            placeholder="Whole # required"
             value={ingredientQuantity}
             onChange={(event) => setIngredientQuantity(event.target.value)}
           />
@@ -93,6 +94,7 @@ const NewIngredientsForm = ({ recipeId }) => {
           <label>Units</label>
           <input
             type="text"
+            placeholder="Cups, half cup, lbs etc..."
             value={ingredientUnits}
             onChange={(event) => setIngredientUnits(event.target.value)}
           />
@@ -115,7 +117,7 @@ const NewIngredientsForm = ({ recipeId }) => {
         <h3 className="list-of-ingredients">Added Ingredients:</h3>
         <ul style={{ display: "flex", flexDirection: "column" }}>
           {ingredients?.map((item) => (
-            <li key={item}>
+            <li key={item.id}>
               {item.quantity} {item.units} of {item.ingredient_name}
               <br />
             </li>
