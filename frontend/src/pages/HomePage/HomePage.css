@@ -1,65 +1,65 @@
-
 .home-container-home {
-    display: flex;
-    position: relative;
-    min-height: 100vh;
-    min-width: 100vw;
-    justify-content: space-between;
+  display: flex;
+  position: relative;
+  min-height: 100vh;
+  min-width: 100vw;
+  justify-content: space-around;
 }
 
-.home-container-home::before{
-    content: "";
-    background-image: url("../../Images/AcadianFlag.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    opacity: 0.15; 
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: -1;
+.home-container-home::before {
+  content: "";
+  background-image: url("../../Images/AcadianFlag.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  opacity: 0.15;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
 }
 
 .welcome-section-container {
-    display: flex;
-    align-items: center;
-    font-size: xx-large;
-    padding-left: 2rem;
-    margin-right: 2rem;
-    text-shadow: var(--main-color-r) 2px 0 10px;
+  display: flex;
+  align-items: center;
+  font-size: xx-large;
+  padding-left: 2rem;
+  margin-right: 2rem;
+  text-shadow: var(--main-color-r) 2px 0 10px;
 }
 
 .hero-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-content: space-around;
 }
 
-.home-recipe-option{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: x-large;
+.home-recipe-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: x-large;
 }
 
 .option {
-    display: flex;
-    padding: 30px;
-    text-shadow: var(--main-color-r) 2px 0 10px;
-    color: black;
+  display: flex;
+  padding: 30px;
+  text-shadow: var(--main-color-r) 2px 0 10px;
+  color: black;
 }
 
 .home-pinch {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: large;
-    font-weight: bolder;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: large;
+  font-weight: bolder;
+  max-width: 500px;
 }
 
 .pinch {
-    text-align: left;
+  text-align: left;
 }

@@ -11,11 +11,15 @@ const Navbar = () => {
     <div className="navBar">
       <ul>
         <li className="brand">
-          <Link to="/" >
-          <box-icon name='home' color='rgb(255,222,0)'></box-icon>
+          <Link to="/">
+            <box-icon name="home" color="rgb(255,222,0)"></box-icon>
           </Link>
         </li>
-        <h1><b><i>The Backward Cajun</i></b></h1>
+        <h1>
+          <b>
+            <i>The Backward Cajun</i>
+          </b>
+        </h1>
         <li>
           {user ? (
             <button onClick={logoutUser}>Logout</button>

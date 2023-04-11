@@ -37,7 +37,7 @@ const MyRecipesPage = () => {
       <div className="add-recipe-link">
         <a href="http://localhost:3000/newrecipe/">Click to Add New Recipe</a>
       </div>
-      <div className="recipe-header">My recipes</div>
+      <div className="recipe-header">My Recipes</div>
       <RecipeList recipes={recipes} />
     </>
   );

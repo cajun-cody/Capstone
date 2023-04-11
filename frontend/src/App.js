@@ -20,20 +20,53 @@ import Footer from "./components/Footer/Footer";
 import PrivateRoute from "./utils/PrivateRoute";
 import RecipePage from "./pages/RecipePage/RecipePage";
 
-
-
 function App() {
   return (
     <div>
       <Navbar />
       <Routes>
-        <Route path="/" element={ <PrivateRoute> <HomePage /> </PrivateRoute>} />
-        <Route path='/editRecipe' element={<EditRecipePage />} />
-        <Route path='/addIngredients/:recipeId' element={<AddIngredientsPage />} />
-        <Route path='/newrecipe' element={<NewRecipePage/>} />
-        <Route path='/myrecipes' element={<MyRecipesPage/>} />
-        <Route path='/search' element={<SearchPage/>} />
-        <Route path= "/recipe/:recipeId" element={<RecipePage />} />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              {" "}
+              <HomePage />{" "}
+            </PrivateRoute>
+          }
+        />
+        <Route path="/editRecipe" element={<EditRecipePage />} />
+        <Route
+          path="/addIngredients/:recipeId"
+          element={<AddIngredientsPage />}
+        />
+        <Route
+          path="/newrecipe"
+          element={
+            <PrivateRoute>
+              {" "}
+              <NewRecipePage />{" "}
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/myrecipes"
+          element={
+            <PrivateRoute>
+              {" "}
+              <MyRecipesPage />{" "}
+            </PrivateRoute>
+          }
+        />
+        <Route path="/search" element={<SearchPage />} />
+        <Route
+          path="/recipe/:recipeId"
+          element={
+            <PrivateRoute>
+              {" "}
+              <RecipePage />{" "}
+            </PrivateRoute>
+          }
+        />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>

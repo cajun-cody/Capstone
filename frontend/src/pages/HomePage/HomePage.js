@@ -12,7 +12,10 @@ const HomePage = () => {
     <div className="home-container-home">
       <section className="welcome-section-container">
         <div className="welcome-container">
-          <h1>Welcome {user.username}!</h1>
+          <h1>
+            Welcome{" "}
+            {user.username.charAt(0).toUpperCase() + user.username.slice(1)}!
+          </h1>
         </div>
       </section>
       <section className="hero-section">
@@ -32,7 +35,7 @@ const HomePage = () => {
           <div className="pinch">
             <h1>Definition of Pinch in Cajun Cooking</h1>
             <p>
-              Cajun Pinch<small class="text-muted">...[key-juhn pinch]</small>
+              Cajun Pinch<small class="text-muted">...[kay-juhn pinch]</small>
             </p>
             <p>
               <i>noun </i>
