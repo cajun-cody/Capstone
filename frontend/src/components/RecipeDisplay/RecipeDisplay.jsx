@@ -1,5 +1,4 @@
 import axios from "axios";
-// import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import CommentForm from "../CommentForm/CommentForm";
@@ -41,8 +40,8 @@ const RecipeDisplay = (props) => {
       );
       setRecipe(recipeResponse.data);
       setIngredients(ingredientsResponse.data);
-      // console.log(recipeResponse.data);
-      // console.log(ingredientsResponse.data);
+      console.log(recipeResponse.data);
+      console.log(ingredientsResponse.data);
     } catch (error) {
       // console.error(error);
     }
@@ -73,7 +72,7 @@ const RecipeDisplay = (props) => {
   };
 
 
-  // Add a new state for the previous valid servings value
+  // Add a new state for the previous valid servings value and requires value to me a whole number above 0
   const [prevValidServings, setPrevValidServings] = useState(
     recipe?.serving_size || 1
   );
@@ -95,11 +94,11 @@ const RecipeDisplay = (props) => {
       setServings(newServings);
       setIngredients(updateQuantities(ingredients, newServings));
     } catch (er) {
-      console.log(er);
+      // console.log(er);
     }
   };
 
-//Print to pdf function. 
+//Print to pdf function. Need to fix to scale down or take in entire content. 
 const recipeContent = useRef(null);
 
 const printToPDF = () => {
@@ -125,12 +124,17 @@ const printToPDF = () => {
 //   });
 // };
 
- 
- 
-
   //Navigate routed to EditRecipePage using edit button in form
+  //Navigate routed to EditRecipePage
   const navToEditRecipe = (recipeObject) => {
     navigate(`/editRecipe`, {
+      state: { recipe: recipeObject, ingedients: ingredients },
+    });
+  };
+
+  //Navigate routed to AddIngredientPage using Add Ingredient Button in form. 
+  const navToAddIngredient = (recipeObject) => {
+    navigate(`/addIngredients/${recipe.id}`, {
       state: { recipe: recipeObject, ingedients: ingredients },
     });
   };
@@ -157,6 +161,33 @@ const printToPDF = () => {
       console.log(error.response.data);
     }
   }
+
+  //Delete a recipe_ingredient by Id. 
+  async function deleteIngredient(ingredient) {
+
+    try {
+        const confirmed = window.confirm("Are you sure you want to delete this ingredient?")
+        if (confirmed) {
+            let response = await axios.delete(
+            `http://127.0.0.1:8000/api/recipe_ingredient/${ingredient}/`,
+            {
+            headers: { Authorization: "Bearer " + token },
+            }
+            );
+            alert("Ingredient is Deleted!");
+            console.log(response.status);
+            if (response.status === 204) {
+            navigate(`/recipe/${recipe.id}`);
+            window.location.reload();
+            } 
+        }
+       
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
+
+
 
   return (
     <div className="recipe-container" ref={recipeContent}>
@@ -192,10 +223,10 @@ const printToPDF = () => {
           <h2>Ingredients:</h2>
           <ul className="ingredients-list" style={{ display: "flex", flexDirection: "column" }}>
             {ingredients?.map((item) => (
-              <li key={item.name}>
+              <li key={item.id}>
                 {item.quantity} {item.units} of <span className="ingredient-name">{item.ingredient_name}</span>
                 {user?.id === recipe?.user.id ? (
-                <button className="ingredient-edit">Edit</button>
+                <button className="ingredient-delete" onClick={() => deleteIngredient(item.id)}>Delete</button>
                 ): null}
                 <br />
               </li>
@@ -218,14 +249,9 @@ const printToPDF = () => {
  
       {user?.id === recipe?.user.id ? (
         <div className="conditional-btns">
-          <button
-            type="button"
-            className="delete-button"
-            onClick={() => deleteRecipe(recipe)}
-          >
-            Delete Recipe
-          </button>
-          <button className="button" onClick={() => navToEditRecipe(recipe)}>Edit Recipe</button>
+          <button type="button" className="delete-button" onClick={() => deleteRecipe(recipe)} >Delete Recipe</button>
+          <button className="add-recipe-button" onClick={() => navToAddIngredient(recipe)}>Add Ingredient</button>
+          <button className="add-recipe-button" onClick={() => navToEditRecipe(recipe)}>Edit Recipe</button>
         </div>
       ) : null}
       <div className="comment-container">

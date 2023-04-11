@@ -1,7 +1,6 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
-import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 
@@ -21,33 +20,6 @@ const EditRecipeForm = (props) => {
     const [recipeServing_size, setRecipeServing_size] = useState(props.recipe.serving_size);
     const [recipeImage, setRecipeImage] = useState([]);
     const [categories, setCategories] = useState([]);
-
-    //Async function to get a single recipe by Id and also get the ingredient objects(name, quantity and units)
-    // async function getRecipeById() {
-    //     try {
-    //         let recipeResponse = await axios.get(`http://127.0.0.1:8000/api/recipes/${recipeId}/`, {
-    //             headers: {
-    //                 Authorization: "Bearer " + token,
-    //             },
-    //         });
-
-    //         let ingredientsResponse = await axios.get(`http://127.0.0.1:8000/api/recipes/all_ingredients/${recipeId}/`, {
-    //             headers: {
-    //                 Authorization: "Bearer " + token,
-    //             },
-    //         });
-    //         setRecipe(recipeResponse.data)
-    //         setIngredients(ingredientsResponse.data)
-    //         console.log(recipeResponse.data)
-    //         console.log(ingredientsResponse.data)       
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     getRecipeById();
-    // }, [token, props.recipeId]);
 
     //Function to get a list of categories for a dropdown list to choose from.
     useEffect(() => {

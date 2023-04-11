@@ -36,10 +36,10 @@ const HomePage = () => {
                         Definition of Pinch in Cajun Cooking
                     </h1>
                     <p>
-                        Cajun Pinch<small class="text-muted">...[Pinch]</small>
+                        Cajun Pinch<small class="text-muted">...[key-juhn pinch]</small>
                     </p>
-                    <p>
-                        <i>noun (used as a unit of measure in cajun cooking)</i>
+                    <p><i>noun </i>
+                        <p>unit of measure in cajun cooking</p>
                     </p>
                     <p>
                         - season till you hear the voices of your ancestors whisper{" "}

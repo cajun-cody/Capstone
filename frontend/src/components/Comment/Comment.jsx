@@ -21,9 +21,9 @@ const Comment = ({ comment }) => {
  
 export default Comment;
 
-                {/* <div className="reply-list">
+                /* <div className="reply-list">
                     <ReplyList comment_id = {comment.id}/>
                 </div>
                 <div>
                     <ReplyForm comment_id={comment.id}/>
-                </div> */}
+                </div> */

@@ -8,7 +8,7 @@ import useAuth from "../../hooks/useAuth";
 const CommentList = (props) => {
 
     const [comments, setComments] = useState();
-    const [user, token] = useAuth();
+    const [ user, token] = useAuth();
 
     async function getAllComments() {
         let response = await axios.get(`http://127.0.0.1:8000/api/comments/${props.recipe_id}/`, {
@@ -20,7 +20,7 @@ const CommentList = (props) => {
         console.log(response.data)
     }
  
-    //Added videoId to bring in comments only related to the chosen recipe.
+    //Added recipe_id to bring in comments only related to the chosen recipe.
    useEffect(() => {
         getAllComments();
     }, [props.recipe_id])    
@@ -28,7 +28,7 @@ const CommentList = (props) => {
 
     return ( 
         <div className="comment-list">
-            <h4>Comments</h4>
+            <h3>Comments</h3>
             {comments&&comments.map( item => <Comment key={item.id}comment={item}/>)}
         </div>
 

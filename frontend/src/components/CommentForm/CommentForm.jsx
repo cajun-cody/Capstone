@@ -10,6 +10,7 @@ const CommentForm = (props) => {
     const [user, token] = useAuth();
     const refresh = () => window.location.reload(true);
 
+    //Function to post a new comment
     async function postComment(newComment) {
         let response = await axios.post(`http://127.0.0.1:8000/api/comments/`, 
         newComment,
@@ -31,7 +32,7 @@ const CommentForm = (props) => {
 
     return ( 
         <form onSubmit={handleSubmit} className='comment-form'>
-            <label>Post a Comment</label>
+            {/* <label>Post a Comment</label> */}
             <div className="post-input">
                 <input className='input' value={comment} onChange={(event) => setComment(event.target.value)}/>
                 <button type='submit' className="comment-btn" onClick={refresh}>Post Comment</button>

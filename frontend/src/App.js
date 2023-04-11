@@ -27,14 +27,7 @@ function App() {
     <div>
       <Navbar />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <HomePage />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/" element={ <PrivateRoute> <HomePage /> </PrivateRoute>} />
         <Route path='/editRecipe' element={<EditRecipePage />} />
         <Route path='/addIngredients/:recipeId' element={<AddIngredientsPage />} />
         <Route path='/newrecipe' element={<NewRecipePage/>} />

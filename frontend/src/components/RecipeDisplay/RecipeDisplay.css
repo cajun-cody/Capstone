@@ -177,13 +177,19 @@
   margin-top: 50px;
 }
 
-.ingredient-edit {
-  background-color: var(--main-color-b);
+.ingredient-delete {
+  background-color: var(--main-color-r);
   color:var(--main-color-w);
   padding: 5px 10px;
-  border-radius: 3px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
   border: none;
   cursor: pointer;
   margin-left: 20px;
+  transition: background-color 0.3s ease;
 }
 
+.ingredient-delete:hover {
+  background-color: var(--main-color-r);
+}

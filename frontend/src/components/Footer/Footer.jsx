@@ -17,7 +17,7 @@ const Footer = () => {
 
   return (
     <footer id="my-footer" style={{ display: isVisible ? "block" : "none" }}>
-      <p><i>Powered by The Backward Cajun</i></p>{" "}
+      <p><i></i></p>{" "}
     </footer>
   );
 };

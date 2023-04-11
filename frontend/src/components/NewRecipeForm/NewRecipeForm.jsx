@@ -83,7 +83,7 @@ const NewRecipeForm = (props) => {
 
     return ( 
         <section className="new-recipe-section">
-            <div className="recipe-header">Wat We Cookin??</div>
+            <div className="recipe-header">What Yall Cookin??</div>
             <form className="recipe-form-container" onSubmit={e=>handleSubmit(e)}>
                 <div className="user-inputs">
                     <label>Title</label>
