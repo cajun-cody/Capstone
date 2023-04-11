@@ -4,11 +4,8 @@ import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import "./NewRecipeForm.css";
 
-// import CreatableSelect from 'react-select/creatable';
-
-
+//Component to create a new basic recipe. Button at bottom will take user to page to add ingredients to the new recipe. 
 const NewRecipeForm = (props) => {
-
     
     const navigate = useNavigate();
     const [recipeTitle, setRecipeTitle] = useState('');
@@ -18,7 +15,7 @@ const NewRecipeForm = (props) => {
     const [recipeInstructions, setRecipeInstructions] = useState('');
     const [recipeServing_size, setRecipeServing_size] = useState('');
     const [recipeImage, setRecipeImage] = useState(['']);
-    const [recipeId, setRecipeId]   = useState(null);//new state variable to hold state of recipe Id to pass into recipe ingredients form.
+    // const [recipeId, setRecipeId]   = useState(null);//new state variable to hold state of recipe Id to pass into recipe ingredients form.
     const [categories, setCategories] = useState([]);
 
     const [user, token] = useAuth();
@@ -58,6 +55,7 @@ const NewRecipeForm = (props) => {
         }
     }
 
+    //HandleSubmit for form.data. Form.data used to add an image file. 
     async function handleSubmit(event) {
         event.preventDefault();
 
@@ -68,15 +66,10 @@ const NewRecipeForm = (props) => {
         formData.append("description", recipeDescription);
         formData.append("instructions", recipeInstructions);
         formData.append("serving_size", recipeServing_size);
-        // formData.append("image", recipeImage);
         formData.append("image", recipeImage);
         formData.append("user_id", user.id);
-
-        //Add category to form data
         formData.append("category_id", recipeCategory);
-        
-        
-        // await addNewIngredient(formData);
+             
         await addNewRecipe(formData)
     }
     

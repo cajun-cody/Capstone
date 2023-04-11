@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Footer.css";
 
+
+//Function to hide footer while scrolling. Need to fix to also hide as to not cover screen content. 
 const Footer = () => {
   const [isVisible, setIsVisible] = useState(true);
 

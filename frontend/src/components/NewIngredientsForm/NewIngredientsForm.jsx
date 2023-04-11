@@ -9,11 +9,10 @@ const NewIngredientsForm = ({recipeId}) => {
     console.log("NewIngredientsForm", recipeId)
     
     //New use states to add an ingredient and add a recipe ingredient to the database. Once this is done the recipe ingredient (name, qty, units) will be added as an object to the new recipe. 
-    // const [recipeIngredients, setRecipeIngredients] = useState([])
     const [ingredient, setIngredient] = useState('');
     const [ingredientQuantity, setIngredientQuantity] = useState();
     const [ingredientUnits, setIngredientUnits] = useState('');
-    // const [recipeId, setRecipeId] = useState();
+
     const [user, token] = useAuth();
     const refresh = () => window.location.reload(true);
     //State to hold all ingredients added and map out in return. 
@@ -71,7 +70,7 @@ const NewIngredientsForm = ({recipeId}) => {
     }, [])
 
     const handleViewNewRecipe = (event) => {
-        // redirect the user to the recipe view page for the newly created recipe's ID
+        // Redirect the user to the recipe view page for the newly created recipe's ID
         window.location.href = `/recipe/${recipeId}`;
       };
     
@@ -114,4 +113,3 @@ const NewIngredientsForm = ({recipeId}) => {
  
 export default NewIngredientsForm;
 
-// 
