@@ -1,3 +1,6 @@
+
+
+
 .recipe-container {
   max-width: 800px;
   margin: 0 auto;
@@ -135,6 +138,7 @@
 }
 
 
+
 /* Style for delete button */
 .delete-button {
   display: inline-block;
@@ -172,3 +176,14 @@
 .recipe-comments {
   margin-top: 50px;
 }
+
+.ingredient-edit {
+  background-color: var(--main-color-b);
+  color:var(--main-color-w);
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  margin-left: 20px;
+}
+

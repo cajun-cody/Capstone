@@ -6,8 +6,9 @@ import CommentForm from "../CommentForm/CommentForm";
 import CommentList from "../CommentList/CommentList";
 import { useNavigate } from "react-router-dom";
 import "./RecipeDisplay.css";
-import jsPDF from "jspdf";
+import jsPDF, { ImageDataType } from "jspdf";
 import html2canvas from "html2canvas";
+import { useRef } from "react";
 
 //Component to fetch a single recipe and display it.
 const RecipeDisplay = (props) => {
@@ -40,10 +41,10 @@ const RecipeDisplay = (props) => {
       );
       setRecipe(recipeResponse.data);
       setIngredients(ingredientsResponse.data);
-      console.log(recipeResponse.data);
-      console.log(ingredientsResponse.data);
+      // console.log(recipeResponse.data);
+      // console.log(ingredientsResponse.data);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }
   //useEffect hook to fetch recipe and ingredients data when the component mounts or token changes
@@ -70,16 +71,7 @@ const RecipeDisplay = (props) => {
     });
     return updatedIngredients;
   };
-  //   //Function to handle change of the from the original ingredient servings and setServings.
-  //   const handleServingsChange = (event) => {
-  //     try{
-  //         const newServings = parseInt(event.target.value || 1);
-  //         setServings(newServings);
-  //         setIngredients(updateQuantities(ingredients, newServings));
-  //     }catch(er){
-  //         console.log(er)
-  //     }
-  //   };
+
 
   // Add a new state for the previous valid servings value
   const [prevValidServings, setPrevValidServings] = useState(
@@ -107,23 +99,32 @@ const RecipeDisplay = (props) => {
     }
   };
 
-//Function to print recipe.
-// const printRecipe = async () => {
-//   try {
-//     const element = document.getElementById('element-to-print');
-//     console.log(element)
-//     const canvas = await html2canvas(element);
-//     const pdf = new jsPDF('p', 'mm', [canvas.width, canvas.height]);
-//     pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, canvas.width, canvas.height);
-//     pdf.save('recipe.pdf');
-//   } catch (error) {
-//     console.log(error);
-//   }
+//Print to pdf function. 
+const recipeContent = useRef(null);
+
+const printToPDF = () => {
+  html2canvas(recipeContent.current).then((canvas) => {
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
+    const width = pdf.internal.pageSize.getWidth();
+    const height = (canvas.height * width) / canvas.width;
+    const scaleFactor = width / canvas.width;
+    pdf.addImage(imgData, "PNG", 0, 0, canvas.width * scaleFactor, canvas.height * scaleFactor, null, null, null, null, null, {scale: scaleFactor});
+    pdf.save("recipe.pdf");
+  });
+};
+
+// const printToPDF = () => {
+//   html2canvas(recipeContent.current).then((canvas) => {
+//     const imgData = canvas.toDataURL("image/png");
+//     const pdf = new jsPDF("p", "mm", "a4");
+//     const width = pdf.internal.pageSize.getWidth();
+//     const height = (canvas.height * width) / canvas.width;
+//     pdf.addImage(imgData, "PNG", 0, 0, width, height);
+//     pdf.save("recipe.pdf");
+//   });
 // };
 
-// //click event listener to the button
-// const printBtn = document.querySelector('#print-btn');
-// printBtn.addEventListener('click', printRecipe);
  
  
 
@@ -158,10 +159,10 @@ const RecipeDisplay = (props) => {
   }
 
   return (
-    <div className="recipe-container">
+    <div className="recipe-container" ref={recipeContent}>
 
       <h1 className="recipe-header">{recipe?.title}</h1>
-      <img className="recipe-image" src={`http://127.0.0.1:8000${recipe?.image}/`} alt="" />
+      <img id="recipe-img" className="recipe-image" src={`http://127.0.0.1:8000${recipe?.image}/`} alt="" />
       
       <div className="recipe-details">
         <span className="recipe-detail">Chef: {recipe?.home_chef}</span>
@@ -193,6 +194,9 @@ const RecipeDisplay = (props) => {
             {ingredients?.map((item) => (
               <li key={item.name}>
                 {item.quantity} {item.units} of <span className="ingredient-name">{item.ingredient_name}</span>
+                {user?.id === recipe?.user.id ? (
+                <button className="ingredient-edit">Edit</button>
+                ): null}
                 <br />
               </li>
             ))}
@@ -206,7 +210,7 @@ const RecipeDisplay = (props) => {
           recipe?.user.username.slice(1)}
         </h3>
         <div>
-          <button className="button" id="print-btn">Print Recipe</button>
+          <button className="button" onClick={printToPDF}>Print Recipe</button>
         </div>
       </div>
       <h3>Instructions: </h3>
@@ -237,26 +241,32 @@ const RecipeDisplay = (props) => {
 };
 
 export default RecipeDisplay;
-{
-  /* <ul>{recipe?.ingredients.map(item => <li key={item.name}>{item.name}</li>)}</ul> */
-}
-// const ingredients = [{}];
 
-// Need the recipe ID from the RecipeList item that is clicked on
-// Send the ID as a param on the URL
-// Grab the ID with useParams here and use in the AXIOS URL request
+//Function to print recipe.
+// const printRecipe = async () => {
+//   try {
+//     const element = document.getElementById('element-to-print');
+//     console.log(element)
+//     const canvas = await html2canvas(element);
+//     const pdf = new jsPDF('p', 'mm', [canvas.width, canvas.height]);
+//     pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, canvas.width, canvas.height);
+//     pdf.save('recipe.pdf');
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
-//Using props "recipeId" brought in and defined on RecipePage.
-// async function getRecipeById() {
-//     let response = await axios.get(`http://127.0.0.1:8000/api/recipes/${props.recipeId}/`, {
-//         headers: {
-//             Authorization: "Bearer " + token,
-//         },
-//     });
-//     setRecipe(response.data)
-//     console.log(response.data)
-// }
+// //click event listener to the button
+// const printBtn = document.querySelector('#print-btn');
+// printBtn.addEventListener('click', printRecipe);
 
-{
-  /* <button onClick={ () => getRecipeById()}>Get Recipe by ID</button> */
-}
+  //   //Function to handle change of the from the original ingredient servings and setServings.
+  //   const handleServingsChange = (event) => {
+  //     try{
+  //         const newServings = parseInt(event.target.value || 1);
+  //         setServings(newServings);
+  //         setIngredients(updateQuantities(ingredients, newServings));
+  //     }catch(er){
+  //         console.log(er)
+  //     }
+  //   };

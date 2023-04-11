@@ -1,0 +1,31 @@
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    margin-bottom: 15px;
+  }
+  
+  .search-input {
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
+    box-shadow: 0px 0px 10px var(--main-color-b);
+  }
+
+  .search-input, .search-btn {
+    padding: 10px;
+    margin-right: 10px;
+    margin-left: 5px;
+
+  }
+
+  
+  .refresh-button {
+    margin-left: 10px;
+  }
+  
+
+
+  
